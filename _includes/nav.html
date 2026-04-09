@@ -1,6 +1,13 @@
+<!-- Inline nav component (optional standalone use) -->
 <nav class="site-nav" role="navigation" aria-label="Main navigation">
-  <ul class="nav-list">
-    <li><a href="{{ '/' | relative_url }}" class="nav-link{% if page.url == '/' %} nav-link--active{% endif %}">Writing</a></li>
-    <li><a href="{{ '/about/' | relative_url }}" class="nav-link{% if page.url == '/about/' %} nav-link--active{% endif %}">About</a></li>
+  <ul class="nav-list" style="display:flex;gap:1.5rem;list-style:none;margin:0;padding:0;">
+    <li>
+      <a href="{{ '/' | relative_url }}"
+         class="nav-link{% if page.url == '/' %} nav-active{% endif %}">Writing</a>
+    </li>
+    <li>
+      <a href="{{ '/about/' | relative_url }}"
+         class="nav-link{% if page.url == '/about/' %} nav-active{% endif %}">About</a>
+    </li>
   </ul>
 </nav>

@@ -1,23 +1,166 @@
-// ============================================
-// TYPOGRAPHY — minimal, Georgia-forward
-// ============================================
+// ============================================================
+// TYPOGRAPHY — Apple HIG type system
+// SF Pro Display for headings, SF Pro Text for body
+// Exact tracking (letter-spacing) from Apple's published tables
+// ============================================================
 
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
-  font-weight: normal;
-  line-height: 1.25;
-  text-wrap: balance;
-  color: var(--color-text);
+// ── DISPLAY / HERO ───────────────────────────────────────────
+// apple.com hero: 80px+, Bold, tracking -0.05em
+.t-display {
+  font-family:    var(--font-display);
+  font-size:      var(--text-display);
+  font-weight:    700;
+  line-height:    var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  color:          var(--color-text);
+}
+
+// ── TITLE 1 (Large Title equiv) ──────────────────────────────
+// apple.com section heroes: ~56-72px, Bold
+.t-title1 {
+  font-family:    var(--font-display);
+  font-size:      var(--text-hero);
+  font-weight:    700;
+  line-height:    var(--leading-tight);
+  letter-spacing: var(--tracking-display);
+  color:          var(--color-text);
+}
+
+// ── TITLE 2 ──────────────────────────────────────────────────
+// apple.com product title: ~34-48px
+.t-title2 {
+  font-family:    var(--font-display);
+  font-size:      var(--text-title1);
+  font-weight:    700;
+  line-height:    1.1;
+  letter-spacing: var(--tracking-title1);
+  color:          var(--color-text);
+}
+
+// ── TITLE 3 ──────────────────────────────────────────────────
+// apple.com sub-section: ~24-32px
+.t-title3 {
+  font-family:    var(--font-display);
+  font-size:      var(--text-title2);
+  font-weight:    600;
+  line-height:    1.2;
+  letter-spacing: var(--tracking-title2);
+  color:          var(--color-text);
+}
+
+// ── HEADLINE ─────────────────────────────────────────────────
+// Apple: 17pt Semibold — for callout headers, section labels
+.t-headline {
+  font-family:    var(--font-text);
+  font-size:      var(--text-headline);
+  font-weight:    600;
+  line-height:    var(--leading-heading);
+  letter-spacing: var(--tracking-headline);
+  color:          var(--color-text);
+}
+
+// ── BODY ─────────────────────────────────────────────────────
+// Apple: 17pt Regular — main reading text
+.t-body {
+  font-family:    var(--font-text);
+  font-size:      var(--text-body);
+  font-weight:    400;
+  line-height:    var(--leading-body);
+  letter-spacing: var(--tracking-body);
+  color:          var(--color-text);
+}
+
+// ── CALLOUT ──────────────────────────────────────────────────
+// Apple: 16pt Regular — secondary descriptions
+.t-callout {
+  font-family:    var(--font-text);
+  font-size:      var(--text-callout);
+  font-weight:    400;
+  line-height:    1.5;
+  letter-spacing: 0em;
+  color:          var(--color-text-secondary);
+}
+
+// ── FOOTNOTE / CAPTION ───────────────────────────────────────
+// Apple: 13pt, 12pt — metadata, timestamps
+.t-footnote {
+  font-family:    var(--font-text);
+  font-size:      var(--text-footnote);
+  font-weight:    400;
+  line-height:    1.4;
+  letter-spacing: var(--tracking-caption);
+  color:          var(--color-text-secondary);
+}
+
+.t-caption {
+  font-family:    var(--font-text);
+  font-size:      var(--text-caption);
+  font-weight:    400;
+  line-height:    1.35;
+  letter-spacing: var(--tracking-caption);
+  color:          var(--color-text-tertiary);
+}
+
+// ── HEADING ELEMENT DEFAULTS ─────────────────────────────────
+// Matches Apple HIG semantic hierarchy
+h1 {
+  font-family:    var(--font-display);
+  font-size:      var(--text-title1);
+  font-weight:    700;
+  line-height:    1.1;
+  letter-spacing: var(--tracking-title1);
+}
+
+h2 {
+  font-family:    var(--font-display);
+  font-size:      var(--text-title2);
+  font-weight:    700;
+  line-height:    1.15;
+  letter-spacing: var(--tracking-title2);
+}
+
+h3 {
+  font-family:    var(--font-display);
+  font-size:      var(--text-title3);
+  font-weight:    600;
+  line-height:    1.2;
+  letter-spacing: var(--tracking-title3);
+}
+
+h4 {
+  font-family:    var(--font-text);
+  font-size:      var(--text-headline);
+  font-weight:    600;
+  line-height:    var(--leading-heading);
+  letter-spacing: var(--tracking-headline);
+}
+
+h5, h6 {
+  font-family:    var(--font-text);
+  font-size:      var(--text-body);
+  font-weight:    600;
+  line-height:    var(--leading-body);
 }
 
 p {
-  font-family: var(--font-serif);
-  line-height: 1.65;
-  color: var(--color-text);
+  font-size:   var(--text-body);
+  line-height: var(--leading-body);
 }
 
 time {
-  font-family: var(--font-serif);
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
+  font-family:    var(--font-text);
+  font-size:      var(--text-footnote);
+  color:          var(--color-text-secondary);
+  letter-spacing: 0;
+}
+
+// ── EYEBROW TEXT ─────────────────────────────────────────────
+// Apple's small all-caps section labels: "iPhone 16" subtitle kicker
+.eyebrow {
+  font-family:    var(--font-text);
+  font-size:      var(--text-callout);
+  font-weight:    600;
+  letter-spacing: 0.006em;
+  color:          var(--color-text-secondary);
+  text-transform: none;  // Apple does NOT use all-caps on apple.com
 }

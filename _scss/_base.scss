@@ -1,75 +1,144 @@
-// ============================================
-// BASE RESET
-// ============================================
+// ============================================================
+// BASE RESET — Apple-grade foundation
+// ============================================================
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 html {
-  -webkit-font-smoothing: antialiased;
+  // Apple-grade font rendering — critical for SF Pro to look right
+  -webkit-font-smoothing:  antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-  scroll-behavior: smooth;
+  text-rendering:          optimizeLegibility;
+  -webkit-text-size-adjust: none;
+  text-size-adjust:         none;
+
+  scroll-behavior:  smooth;
+  scroll-padding-top: calc(var(--nav-height) + var(--space-6));
+  hanging-punctuation: first last;
   font-size: 16px;
 }
 
 body {
   min-height: 100dvh;
-  background-color: #ffffff;
-  color: #111111;
-  font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 16px;
-  line-height: 1.6;
+  background-color: var(--color-bg);
+  color:            var(--color-text);
+  font-family:      var(--font-text);
+  font-size:        var(--text-body);
+  line-height:      var(--leading-body);
+  // Apple uses optical character alignment
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+  font-variant-ligatures: common-ligatures contextual;
+  transition:
+    background-color var(--duration-mid) var(--ease-apple),
+    color var(--duration-mid) var(--ease-apple);
 }
 
-img, picture, video {
-  display: block;
+// ── MEDIA ────────────────────────────────────────────────────
+img,
+picture,
+video,
+canvas,
+svg {
+  display:   block;
   max-width: 100%;
-  height: auto;
+  height:    auto;
 }
 
+// ── LISTS ────────────────────────────────────────────────────
 ul, ol { list-style: none; }
 
-input, button, textarea, select {
-  font: inherit;
+// ── FORMS ────────────────────────────────────────────────────
+input,
+button,
+textarea,
+select {
+  font:  inherit;
   color: inherit;
 }
 
-p, li { max-width: 72ch; }
+button {
+  cursor:     pointer;
+  background: none;
+  border:     none;
+}
 
+// ── HEADINGS ─────────────────────────────────────────────────
+// Apple headings: tight line-height, balanced wrap
+h1, h2, h3, h4, h5, h6 {
+  font-family:  var(--font-display);
+  font-weight:  700;
+  line-height:  var(--leading-title);
+  text-wrap:    balance;
+  color:        var(--color-text);
+}
+
+// ── BODY COPY ────────────────────────────────────────────────
+p, li, figcaption {
+  text-wrap:  pretty;
+  max-width:  70ch;
+}
+
+// ── LINKS ────────────────────────────────────────────────────
 a {
-  color: #111111;
+  color:           var(--color-accent);
   text-decoration: none;
-  &:hover { text-decoration: underline; }
+  transition:      opacity var(--transition);
+
+  &:hover { opacity: 0.75; }
 }
 
+// ── SELECTION ────────────────────────────────────────────────
 ::selection {
-  background: rgba(0,0,0,0.1);
-  color: #111111;
+  background: rgba(0, 113, 227, 0.18);
+  color:      var(--color-text);
 }
 
+// ── FOCUS ────────────────────────────────────────────────────
 :focus-visible {
-  outline: 2px solid #111111;
+  outline:        2px solid var(--color-accent);
   outline-offset: 3px;
+  border-radius:  var(--radius-sm);
 }
 
+// ── SKIP LINK ────────────────────────────────────────────────
 .skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: #111111;
-  color: #ffffff;
-  padding: 8px 16px;
-  z-index: 100;
+  position:   absolute;
+  top:        -40px;
+  left:       0;
+  background: var(--color-text);
+  color:      var(--color-bg);
+  padding:    var(--space-2) var(--space-4);
+  z-index:    200;
+  font-size:  var(--text-body);
+  transition: top var(--duration-fast) var(--ease-apple);
+
   &:focus { top: 0; }
 }
 
+// ── HORIZONTAL RULE ──────────────────────────────────────────
+hr {
+  border:     none;
+  border-top: 1px solid var(--color-divider);
+  margin:     var(--space-12) 0;
+}
+
+// ── TABLE ────────────────────────────────────────────────────
+table { border-collapse: collapse; width: 100%; }
+
+// ── REDUCED MOTION ───────────────────────────────────────────
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1      !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto   !important;
   }
 }

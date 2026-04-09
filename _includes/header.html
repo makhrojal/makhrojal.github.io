@@ -1,10 +1,78 @@
-<header class="site-header" role="banner">
+<header class="site-header" role="banner" id="site-header">
   <div class="header-inner">
-    <a href="{{ '/' | relative_url }}" class="site-name" aria-label="{{ site.title }} — Home">{{ site.title }}</a>
+
+    <!-- Site name / wordmark -->
+    <a href="{{ '/' | relative_url }}"
+       class="site-name"
+       aria-label="{{ site.title }} — Home">{{ site.title }}</a>
+
+    <!-- Primary navigation -->
     <nav class="header-nav" aria-label="Main navigation">
-      <a href="{{ '/archive/' | relative_url }}">Archive</a>
-      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/archive/' | relative_url }}"
+         {% if page.url contains '/archive' %}class="nav-active"{% endif %}>Archive</a>
+      <a href="{{ '/about/' | relative_url }}"
+         {% if page.url == '/about/' %}class="nav-active"{% endif %}>About</a>
       <a href="{{ '/feed.xml' | relative_url }}">Subscribe</a>
     </nav>
+
+    <!-- Dark mode toggle — Apple-style icon button -->
+    <button class="theme-toggle"
+            aria-label="Switch to dark mode"
+            data-theme-toggle
+            type="button">
+      <!-- Moon icon (shown in light mode) -->
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+           stroke="currentColor" stroke-width="2"
+           stroke-linecap="round" stroke-linejoin="round"
+           aria-hidden="true" focusable="false">
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+      </svg>
+    </button>
+
   </div>
 </header>
+
+<script>
+  (function () {
+    const btn   = document.querySelector('[data-theme-toggle]');
+    const root  = document.documentElement;
+    const hdr   = document.getElementById('site-header');
+
+    // ── Theme init ────────────────────────────────────────
+    const stored   = root.getAttribute('data-theme');
+    const sysDark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    let   theme    = stored || (sysDark ? 'dark' : 'light');
+    root.setAttribute('data-theme', theme);
+
+    function syncIcon(t) {
+      if (!btn) return;
+      btn.setAttribute('aria-label', 'Switch to ' + (t === 'dark' ? 'light' : 'dark') + ' mode');
+      btn.innerHTML = t === 'dark'
+        ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
+        : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    }
+    syncIcon(theme);
+
+    // ── Toggle ────────────────────────────────────────────
+    btn && btn.addEventListener('click', function () {
+      theme = theme === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', theme);
+      syncIcon(theme);
+    });
+
+    // ── Nav scroll shadow ─────────────────────────────────
+    // Matches Apple.com: shadow appears only after scrolling
+    var ticking = false;
+    window.addEventListener('scroll', function () {
+      if (!ticking) {
+        requestAnimationFrame(function () {
+          if (hdr) {
+            hdr.classList.toggle('is-scrolled', window.scrollY > 0);
+          }
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }, { passive: true });
+  })();
+</script>

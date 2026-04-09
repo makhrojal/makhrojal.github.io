@@ -1,36 +1,136 @@
-// ============================================
-// VARIABLES — Naval.al exact palette
-// ============================================
+// ============================================================
+// VARIABLES — Apple Design System DNA
+// apple.com exact: SF Pro, #1d1d1f, #f5f5f7, #6e6e73
+// ============================================================
 
 :root, [data-theme="light"] {
-  --color-bg:           #ffffff;
-  --color-text:         #111111;
-  --color-text-muted:   #999999;
-  --color-border:       #e8e8e8;
-  --color-link:         #111111;
-  --color-accent:       #c0392b;   /* Naval-style crimson/dark red */
 
-  --font-serif: Georgia, "Times New Roman", Times, serif;
+  // ── SURFACES ─────────────────────────────────────────────
+  // Apple light: page bg is warm near-white #f5f5f7
+  // Section alternates: pure white #ffffff
+  --color-bg:            #f5f5f7;
+  --color-surface:       #ffffff;
+  --color-surface-2:     #fbfbfd;
+  --color-surface-offset: #e8e8ed;
+  --color-divider:       #d2d2d7;
+  --color-border:        #d2d2d7;
 
-  --width-content: 740px;
-  --padding-x:     24px;
+  // ── TEXT ────────────────────────────────────────────────
+  // Apple primary text: #1d1d1f (not pure black — warm near-black)
+  // Apple secondary:    #6e6e73 (mid-grey, slightly cool)
+  // Apple tertiary:     #aeaeb2
+  --color-text:          #1d1d1f;
+  --color-text-secondary: #6e6e73;
+  --color-text-tertiary: #aeaeb2;
+  --color-text-inverse:  #f5f5f7;
 
-  --text-xs:   13px;
-  --text-sm:   14px;
-  --text-base: 16px;
-  --text-md:   18px;
-  --text-lg:   22px;
-  --text-xl:   28px;
+  // ── ACCENT ──────────────────────────────────────────────
+  // Apple blue: #0071e3 (exact CTA blue from apple.com)
+  --color-accent:        #0071e3;
+  --color-accent-hover:  #0077ed;
+  --color-accent-active: #006edb;
 
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-5:  20px;
-  --space-6:  24px;
-  --space-8:  32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-20: 80px;
+  // ── FONT FAMILIES ────────────────────────────────────────
+  // SF Pro Display: for display/hero text (≥20pt)
+  // SF Pro Text:    for body text (<20pt)
+  // Web: -apple-system, BlinkMacSystemFont = SF Pro on macOS/iOS
+  // Fallback chain matches Apple spec exactly
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-text:    -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "SF Mono", ui-monospace, Menlo, Monaco,
+                  "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;
+
+  // ── TYPE SCALE ───────────────────────────────────────────
+  // Mirrors Apple HIG precisely:
+  // Large Title: 34px Bold
+  // Title 1:     28px Bold
+  // Title 2:     22px Bold
+  // Headline:    17px Semibold
+  // Body:        17px Regular
+  // Callout:     16px Regular
+  // Footnote:    13px Regular
+  // Caption:     12px Regular
+  //
+  // For web (fluid scaling via clamp):
+  --text-caption:   clamp(0.6875rem, 0.65rem + 0.2vw, 0.75rem);  /* 11-12px */
+  --text-footnote:  clamp(0.75rem,   0.72rem + 0.2vw, 0.8125rem); /* 12-13px */
+  --text-callout:   clamp(0.875rem,  0.85rem + 0.15vw, 1rem);     /* 14-16px */
+  --text-body:      clamp(1rem,      0.97rem + 0.15vw, 1.0625rem); /* 16-17px */
+  --text-headline:  clamp(1.0625rem, 1rem + 0.25vw, 1.125rem);    /* 17-18px */
+  --text-title3:    clamp(1.125rem,  1rem + 0.6vw, 1.375rem);     /* 18-22px */
+  --text-title2:    clamp(1.375rem,  1.1rem + 1.2vw, 1.75rem);    /* 22-28px */
+  --text-title1:    clamp(1.75rem,   1.3rem + 1.8vw, 2.125rem);   /* 28-34px */
+  --text-hero:      clamp(2.125rem,  1rem + 4vw, 4.5rem);         /* 34-72px */
+  --text-display:   clamp(3rem,      1rem + 7vw, 7rem);           /* 48-112px */
+
+  // ── LETTER SPACING (tracking) ────────────────────────────
+  // Apple tracks large display tighter, body stays natural
+  --tracking-display: -0.045em;  /* Hero/Display: tight, premium */
+  --tracking-title1:  -0.025em;  /* Title 1: slightly tight */
+  --tracking-title2:  -0.02em;
+  --tracking-title3:  -0.016em;
+  --tracking-headline: -0.016em; /* Headline/Body: Apple default */
+  --tracking-body:    0em;       /* Body: no tracking */
+  --tracking-caption: 0.007em;   /* Caption: slight open for small */
+
+  // ── LINE HEIGHT ──────────────────────────────────────────
+  --leading-tight:   1.1;   /* Display headlines */
+  --leading-title:   1.15;  /* Section titles */
+  --leading-heading: 1.2;   /* Sub-headings */
+  --leading-body:    1.65;  /* Body reading text (Apple: ~1.6-1.7) */
+  --leading-loose:   1.8;   /* Long-form article body */
+
+  // ── SPACING SYSTEM (8pt base — Apple standard) ──────────
+  --space-1:   0.25rem;   /*  4px */
+  --space-2:   0.5rem;    /*  8px */
+  --space-3:   0.75rem;   /* 12px */
+  --space-4:   1rem;      /* 16px */
+  --space-5:   1.25rem;   /* 20px */
+  --space-6:   1.5rem;    /* 24px */
+  --space-8:   2rem;      /* 32px */
+  --space-10:  2.5rem;    /* 40px */
+  --space-12:  3rem;      /* 48px */
+  --space-16:  4rem;      /* 64px */
+  --space-20:  5rem;      /* 80px */
+  --space-24:  6rem;      /* 96px */
+  --space-32:  8rem;      /* 128px */
+
+  // ── LAYOUT ───────────────────────────────────────────────
+  // Apple max-width: 980px for most content (matches apple.com)
+  // Wide: 1200px for full sections
+  --width-content:   980px;
+  --width-article:   692px;   /* Apple editorial column */
+  --width-wide:      1200px;
+  --padding-x:       clamp(1.25rem, 5vw, 3rem); /* 20-48px gutters */
+
+  // ── RADIUS ───────────────────────────────────────────────
+  // Apple uses subtle but present rounding
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   18px;
+  --radius-2xl:  24px;
+
+  // ── SHADOWS ──────────────────────────────────────────────
+  --shadow-sm:  0 1px 3px rgba(0, 0, 0, 0.08);
+  --shadow-md:  0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg:  0 12px 40px rgba(0, 0, 0, 0.10);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.07), 0 8px 24px rgba(0, 0, 0, 0.05);
+
+  // ── TRANSITIONS ──────────────────────────────────────────
+  // Apple: fast, smooth, spring-like — 200-280ms ease
+  --ease-apple:  cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast: 160ms;
+  --duration-mid:  240ms;
+  --duration-slow: 400ms;
+  --transition:    var(--duration-mid) var(--ease-apple);
+
+  // ── NAV ──────────────────────────────────────────────────
+  --nav-height: 44px;  /* Exact Apple.com nav bar height */
+  --nav-bg: rgba(255, 255, 255, 0.72);
+  --nav-blur: blur(20px) saturate(180%);
+  --nav-border: rgba(0, 0, 0, 0.08);
 }
