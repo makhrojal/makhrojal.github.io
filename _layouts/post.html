@@ -1,0 +1,48 @@
+---
+layout: default
+---
+
+<article class="post-article">
+  <meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}" />
+
+  <header class="post-header fade-in">
+    <div class="container container--narrow">
+      {% if page.category %}
+      <span class="post-category">{{ page.category }}</span>
+      {% endif %}
+      <h1 class="post-title">{{ page.title }}</h1>
+      {% if page.subtitle %}
+      <p class="post-subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+      <div class="post-meta">
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+        {% if page.reading_time %}
+        <span class="meta-sep">·</span>
+        <span>{{ page.reading_time }} min read</span>
+        {% endif %}
+      </div>
+    </div>
+  </header>
+
+  <div class="post-body container container--narrow prose">
+    {{ content }}
+  </div>
+
+  <footer class="post-footer container container--narrow">
+    <div class="post-nav">
+      {% if page.previous.url %}
+      <a href="{{ page.previous.url | relative_url }}" class="post-nav__item post-nav__prev">
+        <span class="nav-label">← Previous</span>
+        <span class="nav-title">{{ page.previous.title }}</span>
+      </a>
+      {% endif %}
+      {% if page.next.url %}
+      <a href="{{ page.next.url | relative_url }}" class="post-nav__item post-nav__next">
+        <span class="nav-label">Next →</span>
+        <span class="nav-title">{{ page.next.title }}</span>
+      </a>
+      {% endif %}
+    </div>
+    <a href="{{ '/' | relative_url }}" class="back-home">← All writing</a>
+  </footer>
+</article>
