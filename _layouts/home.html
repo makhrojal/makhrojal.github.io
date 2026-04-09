@@ -93,7 +93,7 @@ layout: default
   </div>
 </section>
 
-<!-- MORE FROM NEWSROOM — posts index 4+ using direct array access -->
+<!-- MORE FROM NEWSROOM — posts index 4+ using concat to build array -->
 <section class="more-section" id="more">
   <div class="more-section__inner">
     <div class="more-header">
@@ -102,12 +102,8 @@ layout: default
     </div>
     <div class="more-grid">
       {% assign imgs = "more-bxc.jpg,more-sakip.jpg,more-leverage.jpg,more-branding.jpg,more-sandwich.jpg,more-ai.jpg,more-pns-bisnis.jpg,more-konsistensi.jpg" | split: "," %}
-      {% assign p4  = site.posts[4]  %}{% assign p5  = site.posts[5]  %}
-      {% assign p6  = site.posts[6]  %}{% assign p7  = site.posts[7]  %}
-      {% assign p8  = site.posts[8]  %}{% assign p9  = site.posts[9]  %}
-      {% assign p10 = site.posts[10] %}{% assign p11 = site.posts[11] %}
-      {% assign more_posts = p4, p5, p6, p7, p8, p9, p10, p11 %}
-      {% for post in more_posts %}{% unless post == nil %}
+      {% assign more_posts = site.posts | where_exp: "post", "post.id != hero.id and post.id != side.id and post.id != post2.id and post.id != post3.id" %}
+      {% for post in more_posts %}
         {% assign img_idx = forloop.index0 | modulo: 8 %}
         <a href="{{ post.url | relative_url }}" class="more-item">
           <div class="more-item__img-wrap">
@@ -122,7 +118,7 @@ layout: default
             <time class="more-item__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
           </div>
         </a>
-      {% endunless %}{% endfor %}
+      {% endfor %}
     </div>
     <div class="more-footer-links">
       <a href="{{ '/archive/' | relative_url }}" class="view-all-btn">View All ›</a>
@@ -130,3 +126,4 @@ layout: default
     </div>
   </div>
 </section>
+
