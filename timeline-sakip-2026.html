@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timeline SAKIP 2026 | Kemenhub</title>
+  <style>
+    :root {
+      --primary: #1a1a2e;
+      --accent: #c0392b;
+      --gold: #d4a017;
+      --green: #1a5276;
+      --bg: #f5f5f7;
+      --card: #ffffff;
+      --text: #1d1d1f;
+      --muted: #6e6e73;
+      --radius: 12px;
+      --shadow: 0 4px 20px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: linear-gradient(135deg, var(--primary) 0%, #16213e 100%);
+      color: white;
+      padding: 48px 24px 36px;
+      text-align: center;
+    }
+    header .badge {
+      display: inline-block;
+      background: var(--accent);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 14px;
+    }
+    header h1 {
+      font-size: clamp(24px, 5vw, 42px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+    }
+    header p {
+      font-size: 15px;
+      opacity: 0.75;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 20px; }
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--primary);
+      margin: 40px 0 16px;
+      padding-bottom: 8px;
+      border-bottom: 3px solid var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    /* TABLE */
+    .table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+    table { width: 100%; border-collapse: collapse; background: var(--card); font-size: 14px; }
+    thead tr { background: var(--primary); color: white; }
+    thead th { padding: 14px 16px; text-align: left; font-weight: 600; white-space: nowrap; }
+    tbody tr { border-bottom: 1px solid #f0f0f0; transition: background 0.15s; }
+    tbody tr:hover { background: #fafafa; }
+    tbody td { padding: 12px 16px; vertical-align: top; }
+    .tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .tag-sk { background: #fde8d8; color: #c0392b; }
+    .tag-eval { background: #d5e8d4; color: #27ae60; }
+    .tag-rkt { background: #dae8fc; color: #1a5276; }
+    .tag-pk { background: #e1d5e7; color: #6c3483; }
+    .tag-lkip { background: #fff3cd; color: #856404; }
+    .tag-renaksi { background: #d1ecf1; color: #0c5460; }
+    .tag-esakip { background: #f8d7da; color: #721c24; }
+    .tag-lmck { background: #e2e3e5; color: #383d41; }
+    .tag-spip { background: #d4edda; color: #155724; }
+    .tag-mon { background: #fff3cd; color: #856404; }
+    .date-chip {
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 600;
+      white-space: nowrap;
+      display: inline-block;
+    }
+    .month-group td { background: #f0f4ff; font-weight: 700; color: var(--primary); }
+    /* GCAL SECTION */
+    .gcal-box {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-top: 16px;
+    }
+    .gcal-box p { font-size: 14px; color: var(--muted); margin-bottom: 16px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.88; }
+    .btn-secondary {
+      background: var(--primary);
+    }
+    .btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 16px; }
+    /* ICS STEPS */
+    .steps { margin-top: 20px; }
+    .step {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid #f0f0f0;
+    }
+    .step-num {
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      width: 28px;
+      height: 28px;
+      min-width: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .step p { font-size: 14px; margin: 0; }
+    /* LEGEND */
+    .legend { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 24px; }
+    .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; }
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 20px;
+      color: var(--muted);
+      font-size: 13px;
+      border-top: 1px solid #e0e0e0;
+      margin-top: 40px;
+    }
+    @media (max-width: 640px) {
+      thead th, tbody td { padding: 10px 12px; font-size: 13px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="badge">ITJEN KEMENHUB</div>
+  <h1>⏱ Timeline SAKIP 2026</h1>
+  <p>Jadwal lengkap kegiatan Sistem Akuntabilitas Kinerja Instansi Pemerintah Tahun 2026 beserta format ekspor Google Calendar.</p>
+</header>
+
+<div class="container">
+
+  <!-- LEGEND -->
+  <div class="section-title">🏷️ Kategori Kegiatan</div>
+  <div class="legend">
+    <div class="legend-item"><span class="tag tag-sk">SK Tim</span></div>
+    <div class="legend-item"><span class="tag tag-eval">Evaluasi</span></div>
+    <div class="legend-item"><span class="tag tag-rkt">RKT</span></div>
+    <div class="legend-item"><span class="tag tag-pk">PK</span></div>
+    <div class="legend-item"><span class="tag tag-lkip">LKIP</span></div>
+    <div class="legend-item"><span class="tag tag-renaksi">Renaksi</span></div>
+    <div class="legend-item"><span class="tag tag-esakip">E-SAKIP Reviu</span></div>
+    <div class="legend-item"><span class="tag tag-lmck">LMCK TW</span></div>
+    <div class="legend-item"><span class="tag tag-spip">SPIP</span></div>
+    <div class="legend-item"><span class="tag tag-mon">Monitoring</span></div>
+  </div>
+
+  <!-- TABLE -->
+  <div class="section-title">📅 Jadwal Kegiatan SAKIP 2026</div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Bulan</th>
+          <th>Tanggal</th>
+          <th>Kegiatan</th>
+          <th>Kategori</th>
+          <th>Keterangan</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JAN 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Januari 2026</td></tr>
+        <tr><td>1</td><td>Januari 2026</td><td><span class="date-chip">1 Jan</span></td><td>RKT 2026</td><td><span class="tag tag-rkt">RKT</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>2</td><td>Januari 2026</td><td><span class="date-chip">5 Jan</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>3</td><td>Januari 2026</td><td><span class="date-chip">20 Jan</span></td><td>SK TIM 2026 (Es. I, Es. II, Balai)</td><td><span class="tag tag-sk">SK Tim</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>4</td><td>Januari 2026</td><td><span class="date-chip">20 Jan</span></td><td>PK Pimpinan Berjenjang 2026</td><td><span class="tag tag-pk">PK</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>5</td><td>Januari 2026</td><td><span class="date-chip">20 Jan</span></td><td>Renaksi 2026</td><td><span class="tag tag-renaksi">Renaksi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>6</td><td>Januari 2026</td><td><span class="date-chip">25 Jan</span></td><td>LKIP 2025 (Balai)</td><td><span class="tag tag-lkip">LKIP</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>7</td><td>Januari 2026</td><td><span class="date-chip">28 Jan</span></td><td>E-SAKIP Reviu 2026</td><td><span class="tag tag-esakip">E-SAKIP Reviu</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>8</td><td>Januari 2026</td><td><span class="date-chip">25 Jan</span></td><td>Monitoring Renaksi 2025 (Balai)</td><td><span class="tag tag-mon">Monitoring</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- FEB 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Februari 2026</td></tr>
+        <tr><td>9</td><td>Februari 2026</td><td><span class="date-chip">5 Feb</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>10</td><td>Februari 2026</td><td><span class="date-chip">20 Feb</span></td><td>Revisi Renaksi 2026</td><td><span class="tag tag-renaksi">Renaksi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>11</td><td>Februari 2026</td><td><span class="date-chip">28 Feb</span></td><td>E-SAKIP Reviu 2026</td><td><span class="tag tag-esakip">E-SAKIP Reviu</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>12</td><td>Februari 2026</td><td><span class="date-chip">30 Jan</span></td><td>LKIP 2025 (Es. II)</td><td><span class="tag tag-lkip">LKIP</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>13</td><td>Februari 2026</td><td><span class="date-chip">30 Jan</span></td><td>Monitoring Renaksi 2025 (Es. II)</td><td><span class="tag tag-mon">Monitoring</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- MAR 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Maret 2026</td></tr>
+        <tr><td>14</td><td>Maret–Juni 2026</td><td><span class="date-chip">Mar–Jun</span></td><td>Evaluasi SAKIP 2025 oleh ITJEN</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>15</td><td>Maret–Juni 2026</td><td><span class="date-chip">Mar–Jun</span></td><td>Evaluasi Mandiri SAKIP 2025 Pendampingan ITJEN</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>16</td><td>Maret 2026</td><td><span class="date-chip">5 Mar</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <!-- APR 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 April 2026</td></tr>
+        <tr><td>17</td><td>April 2026</td><td><span class="date-chip">5 Apr</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>18</td><td>April 2026</td><td><span class="date-chip">20 Apr</span></td><td>LMCK TW I 2026</td><td><span class="tag tag-lmck">LMCK TW</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- MEI 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Mei 2026</td></tr>
+        <tr><td>19</td><td>Mei–Juni 2026</td><td><span class="date-chip">Mei–Jun</span></td><td>Penjaminan Kualitas (PK) – SPIP – ITJEN</td><td><span class="tag tag-spip">SPIP</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>20</td><td>Mei 2026</td><td><span class="date-chip">5 Mei</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>21</td><td>Mei 2026</td><td><span class="date-chip">24 Mei</span></td><td>Pengumpulan LKE–RB oleh KEMENPAN-RB</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- JUN 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Juni 2026</td></tr>
+        <tr><td>22</td><td>Juni 2026</td><td><span class="date-chip">5 Jun</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>23</td><td>Juni 2026</td><td><span class="date-chip">20 Jun</span></td><td>LMCK TW II 2026</td><td><span class="tag tag-lmck">LMCK TW</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>24</td><td>Juni 2026</td><td><span class="date-chip">28 Jun</span></td><td>Laporan Hasil Penilaian Mandiri (LHPM) – SPIP – BPKP</td><td><span class="tag tag-spip">SPIP</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>25</td><td>Juni 2026</td><td><span class="date-chip">30 Jun</span></td><td>Revisi PK 2026</td><td><span class="tag tag-pk">PK</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- JUL 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Juli 2026</td></tr>
+        <tr><td>26</td><td>Juli 2026</td><td><span class="date-chip">5 Jul</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>27</td><td>Juli 2026</td><td><span class="date-chip">30 Jul</span></td><td>Revisi Renaksi 2026</td><td><span class="tag tag-renaksi">Renaksi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>28</td><td>Juli 2026</td><td><span class="date-chip">30 Jul</span></td><td>Laporan Hasil Evaluasi ITJEN</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- AGS 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Agustus 2026</td></tr>
+        <tr><td>29</td><td>Agustus 2026</td><td><span class="date-chip">5 Ags</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>30</td><td>Agustus 2026</td><td><span class="date-chip">8 Ags (EST)</span></td><td>Evaluasi SAKIP 2025 oleh KEMENPAN-RB</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Estimasi, Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>31</td><td>Agustus 2026</td><td><span class="date-chip">20 Ags</span></td><td>LMCK TW III 2026</td><td><span class="tag tag-lmck">LMCK TW</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- SEP 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 September 2026</td></tr>
+        <tr><td>32</td><td>September 2026</td><td><span class="date-chip">5 Sep</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>33</td><td>September 2026</td><td><span class="date-chip">30 Sep</span></td><td>Revisi PK Akhir 2026</td><td><span class="tag tag-pk">PK</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- OKT 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Oktober 2026</td></tr>
+        <tr><td>34</td><td>Oktober 2026</td><td><span class="date-chip">5 Okt</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>35</td><td>Oktober 2026</td><td><span class="date-chip">TL Okt</span></td><td>TL Evaluasi ITJEN</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- NOV 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 November 2026</td></tr>
+        <tr><td>36</td><td>November 2026</td><td><span class="date-chip">5 Nov</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>37</td><td>November 2026</td><td><span class="date-chip">20 Nov</span></td><td>LMCK TW IV 2026</td><td><span class="tag tag-lmck">LMCK TW</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <!-- DES 2026 -->
+        <tr><td colspan="6" class="month-group"><td></td>📌 Desember 2026</td></tr>
+        <tr><td>38</td><td>Desember 2026</td><td><span class="date-chip">1 Des</span></td><td>RKT 2027</td><td><span class="tag tag-rkt">RKT</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>39</td><td>Desember 2026</td><td><span class="date-chip">5 Des</span></td><td>E-Performance Rutin (setiap tgl 5)</td><td><span class="tag tag-eval">Evaluasi</span></td><td>Upload setiap bulan tanggal 5</td></tr>
+        <tr><td>40</td><td>Desember 2026</td><td><span class="date-chip">20 Des</span></td><td>SK TIM 2027 (Es. I, Es. II, Balai)</td><td><span class="tag tag-sk">SK Tim</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>41</td><td>Desember 2026</td><td><span class="date-chip">20 Des</span></td><td>PK Pimpinan Berjenjang 2027</td><td><span class="tag tag-pk">PK</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>42</td><td>Desember 2026</td><td><span class="date-chip">25 Des</span></td><td>LKIP 2026 (Balai)</td><td><span class="tag tag-lkip">LKIP</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>43</td><td>Desember 2026</td><td><span class="date-chip">25 Des</span></td><td>Monitoring Renaksi 2026 (Balai)</td><td><span class="tag tag-mon">Monitoring</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+        <tr><td>44</td><td>Desember 2026</td><td><span class="date-chip">28 Des</span></td><td>E-SAKIP Reviu 2027</td><td><span class="tag tag-esakip">E-SAKIP Reviu</span></td><td>Upload ESR &amp; E-Performance</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- GCAL SECTION -->
+  <div class="section-title">📆 Export ke Google Calendar</div>
+  <div class="gcal-box">
+    <p>Download file <strong>.ics</strong> di bawah ini, lalu import ke Google Calendar untuk mendapatkan pengingat otomatis seluruh kegiatan SAKIP 2026.</p>
+    <div class="btn-row">
+      <button class="btn" onclick="downloadICS()">⬇️ Download File .ics SAKIP 2026</button>
+      <a class="btn btn-secondary" href="https://calendar.google.com/calendar/r" target="_blank">📅 Buka Google Calendar</a>
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-num">1</div><p>Klik tombol <strong>Download File .ics SAKIP 2026</strong> di atas.</p></div>
+      <div class="step"><div class="step-num">2</div><p>Buka <a href="https://calendar.google.com" target="_blank">Google Calendar</a> → klik ikon ⚙️ (Settings) → pilih <strong>Import &amp; Export</strong>.</p></div>
+      <div class="step"><div class="step-num">3</div><p>Klik <strong>Select file from your computer</strong> → pilih file .ics yang sudah didownload.</p></div>
+      <div class="step"><div class="step-num">4</div><p>Pilih kalender tujuan (misal: "SAKIP 2026") → klik <strong>Import</strong>.</p></div>
+      <div class="step"><div class="step-num">5</div><p>Semua event SAKIP 2026 akan langsung muncul di kalender kamu! ✅</p></div>
+    </div>
+  </div>
+
+  <div class="section-title">📝 Catatan Penting</div>
+  <div class="gcal-box">
+    <ul style="font-size:14px; padding-left:18px; color: var(--muted); line-height:2;">
+      <li><strong>E-Performance</strong> wajib diisi setiap tanggal 5 setiap bulan tanpa terkecuali.</li>
+      <li><strong>Evaluasi SAKIP oleh ITJEN</strong> berlangsung Maret–Juni 2026.</li>
+      <li><strong>Evaluasi SAKIP oleh KEMENPAN-RB</strong> estimasi 8 Agustus 2026.</li>
+      <li><strong>Upload ESR &amp; E-Performance</strong> wajib dilakukan untuk setiap kegiatan yang ditandai.</li>
+      <li>Tanggal EST (Estimasi) dapat berubah sesuai kebijakan KEMENPAN-RB.</li>
+      <li>Sumber: Timeline SAKIP 2025–2026 ITJEN Kemenhub.</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  <p>📄 Timeline SAKIP 2026 — ITJEN Kementerian Perhubungan</p>
+  <p style="margin-top:6px;">Dibuat oleh <a href="https://makhrojal.github.io" style="color:var(--accent);">makhrojal.github.io</a> · Data bersumber dari Timeline SAKIP resmi Kemenhub</p>
+</footer>
+
+<script>
+function downloadICS() {
+  const events = [
+    { summary: 'RKT 2026 (SAKIP)', dtstart: '20260101', dtend: '20260102', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Januari', dtstart: '20260105', dtend: '20260106', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'SK TIM 2026 - Es.I, Es.II, Balai', dtstart: '20260120', dtend: '20260121', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'PK Pimpinan Berjenjang 2026', dtstart: '20260120', dtend: '20260121', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Renaksi 2026', dtstart: '20260120', dtend: '20260121', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'LKIP 2025 - Balai', dtstart: '20260125', dtend: '20260126', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-SAKIP Reviu 2026', dtstart: '20260128', dtend: '20260129', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Monitoring Renaksi 2025 - Balai', dtstart: '20260125', dtend: '20260126', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'LKIP 2025 - Es.II', dtstart: '20260130', dtend: '20260131', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Monitoring Renaksi 2025 - Es.II', dtstart: '20260130', dtend: '20260131', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Februari', dtstart: '20260205', dtend: '20260206', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'Revisi Renaksi 2026', dtstart: '20260220', dtend: '20260221', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-SAKIP Reviu 2026 - Feb', dtstart: '20260228', dtend: '20260229', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Maret', dtstart: '20260305', dtend: '20260306', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'Evaluasi SAKIP 2025 oleh ITJEN (mulai)', dtstart: '20260301', dtend: '20260302', description: 'Berlangsung Maret-Juni 2026 | SAKIP 2026' },
+    { summary: 'Evaluasi Mandiri SAKIP 2025 Pendampingan ITJEN', dtstart: '20260301', dtend: '20260302', description: 'Berlangsung Maret-Juni 2026 | Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - April', dtstart: '20260405', dtend: '20260406', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'LMCK TW I 2026', dtstart: '20260420', dtend: '20260421', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Mei', dtstart: '20260505', dtend: '20260506', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'Penjaminan Kualitas (PK) - SPIP - ITJEN (mulai)', dtstart: '20260501', dtend: '20260502', description: 'Berlangsung Mei-Juni 2026 | Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Pengumpulan LKE-RB oleh KEMENPAN-RB', dtstart: '20260524', dtend: '20260525', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Juni', dtstart: '20260605', dtend: '20260606', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'LMCK TW II 2026', dtstart: '20260620', dtend: '20260621', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'LHPM - SPIP - BPKP', dtstart: '20260628', dtend: '20260629', description: 'Laporan Hasil Penilaian Mandiri | Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Revisi PK 2026', dtstart: '20260630', dtend: '20260701', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Juli', dtstart: '20260705', dtend: '20260706', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'Revisi Renaksi 2026 - Juli', dtstart: '20260730', dtend: '20260731', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Laporan Hasil Evaluasi ITJEN', dtstart: '20260730', dtend: '20260731', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Agustus', dtstart: '20260805', dtend: '20260806', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: '[EST] Evaluasi SAKIP 2025 oleh KEMENPAN-RB', dtstart: '20260808', dtend: '20260809', description: 'Estimasi | Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'LMCK TW III 2026', dtstart: '20260820', dtend: '20260821', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - September', dtstart: '20260905', dtend: '20260906', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'Revisi PK Akhir 2026', dtstart: '20260930', dtend: '20261001', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Oktober', dtstart: '20261005', dtend: '20261006', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'TL Evaluasi ITJEN', dtstart: '20261015', dtend: '20261016', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - November', dtstart: '20261105', dtend: '20261106', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'LMCK TW IV 2026', dtstart: '20261120', dtend: '20261121', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'RKT 2027', dtstart: '20261201', dtend: '20261202', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-Performance Rutin - Desember', dtstart: '20261205', dtend: '20261206', description: 'Upload E-Performance setiap tgl 5 | SAKIP 2026' },
+    { summary: 'SK TIM 2027 - Es.I, Es.II, Balai', dtstart: '20261220', dtend: '20261221', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'PK Pimpinan Berjenjang 2027', dtstart: '20261220', dtend: '20261221', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'LKIP 2026 - Balai', dtstart: '20261225', dtend: '20261226', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'Monitoring Renaksi 2026 - Balai', dtstart: '20261225', dtend: '20261226', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+    { summary: 'E-SAKIP Reviu 2027', dtstart: '20261228', dtend: '20261229', description: 'Upload ESR & E-Performance | SAKIP 2026' },
+  ];
+
+  let ics = `BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//SAKIP 2026//ITJEN Kemenhub//ID
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Timeline SAKIP 2026
+X-WR-CALDESC:Jadwal Kegiatan SAKIP 2026 - Kementerian Perhubungan
+X-WR-TIMEZONE:Asia/Jakarta
+`;
+
+  events.forEach((e, i) => {
+    const uid = `sakip2026-event-${i+1}@makhrojal.github.io`;
+    ics += `BEGIN:VEVENT
+UID:${uid}\nDTSTAMP:20260101T000000Z\nDTSTART;VALUE=DATE:${e.dtstart}\nDTEND;VALUE=DATE:${e.dtend}\nSUMMARY:${e.summary}\nDESCRIPTION:${e.description}\nBEGIN:VALARM\nTRIGGER:-P1D\nACTION:DISPLAY\nDESCRIPTION:Reminder: ${e.summary}\nEND:VALARM\nEND:VEVENT\n`;
+  });
+  ics += 'END:VCALENDAR';
+
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Timeline-SAKIP-2026.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+</script>
+
+</body>
+</html>
