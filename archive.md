@@ -26,6 +26,16 @@ permalink: /archive/
     </a>
     {% endfor %}
 
+    <!-- Manual entry: dasar-hukum-uki (not a Jekyll post) -->
+    <a href="/dasar-hukum-uki/" class="article-list-item" role="listitem">
+      <span class="article-list-item__category">Governance</span>
+      <h3 class="article-list-item__title">Daftar Lengkap Dasar Hukum Unit Kepatuhan Internal (UKI) di Indonesia</h3>
+      <p class="article-list-item__excerpt">Hierarki regulasi dari UUD 1945 hingga KM 42/2019 — panduan komprehensif dasar hukum Unit Kepatuhan Internal untuk ASN dan pemerhati tata kelola pemerintahan.</p>
+      <div class="article-list-item__meta">
+        15 min read · <time datetime="2026-04-09">Apr 9, 2026</time>
+      </div>
+    </a>
+
     <!-- Manual entry: dasar-hukum-spip (not a Jekyll post) -->
     <a href="/dasar-hukum-spip/" class="article-list-item" role="listitem">
       <span class="article-list-item__category">Governance</span>
