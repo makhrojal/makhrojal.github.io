@@ -909,10 +909,11 @@ main { display: block; }
     font-size: var(--text-footnote);
   }
   .header-nav a {
-    font-size:    var(--text-caption);
-    padding-inline: var(--space-1);
-    /* Keep min-width to ensure 44px */
-    min-width:    36px;
+    font-size:      var(--text-caption);
+    /* Keep 44px tap target on small phones too */
+    padding-inline: 12px;
+    min-width:      44px;
+    height:         44px;
   }
   /* Tighter page padding on small screens */
   .page-container,
