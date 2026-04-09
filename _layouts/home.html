@@ -49,35 +49,51 @@ layout: default
       </a>
     </div>
 
-    <!-- 2-COL ROW — posts index 2 & 3 (forloop.index0 avoids offset bug) -->
+    <!-- 2-COL ROW — posts index 2 & 3 using direct array access -->
     <div class="card-row-2">
-      {% for post in site.posts %}
-        {% if forloop.index0 == 2 or forloop.index0 == 3 %}
-        <a href="{{ post.url | relative_url }}" class="news-card">
-          <div class="news-card__img-wrap">
-            {% if post.image %}<img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="news-card__img" loading="lazy">
-            {% elsif post.category == "Governance" %}<img src="/assets/images/card-governance.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">
-            {% elsif post.category == "Wealth" %}<img src="/assets/images/card-wealth.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">
-            {% elsif post.category == "Mindset" %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">
-            {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">{% endif %}
+      {% assign post2 = site.posts[2] %}
+      {% assign post3 = site.posts[3] %}
+
+      <a href="{{ post2.url | relative_url }}" class="news-card">
+        <div class="news-card__img-wrap">
+          {% if post2.image %}<img src="{{ post2.image | relative_url }}" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
+          {% elsif post2.category == "Governance" %}<img src="/assets/images/card-governance.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
+          {% elsif post2.category == "Wealth" %}<img src="/assets/images/card-wealth.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
+          {% elsif post2.category == "Mindset" %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
+          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">{% endif %}
+        </div>
+        <div class="news-card__body">
+          <span class="tag tag--{% if post2.category == 'Governance' %}press{% elsif post2.category == 'Mindset' %}story{% elsif post2.category == 'BXC' %}quick{% else %}update{% endif %}">{{ post2.category | upcase | default: "UPDATE" }}</span>
+          <h3 class="news-card__title">{{ post2.title }}</h3>
+          <div class="news-card__meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <time datetime="{{ post2.date | date_to_xmlschema }}">{{ post2.date | date: "%b %-d, %Y" }}</time>
           </div>
-          <div class="news-card__body">
-            <span class="tag tag--{% if post.category == 'Governance' %}press{% elsif post.category == 'Mindset' %}story{% elsif post.category == 'BXC' %}quick{% else %}update{% endif %}">{{ post.category | upcase | default: "UPDATE" }}</span>
-            <h3 class="news-card__title">{{ post.title }}</h3>
-            <div class="news-card__meta">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            </div>
+        </div>
+      </a>
+
+      <a href="{{ post3.url | relative_url }}" class="news-card">
+        <div class="news-card__img-wrap">
+          {% if post3.image %}<img src="{{ post3.image | relative_url }}" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
+          {% elsif post3.category == "Governance" %}<img src="/assets/images/card-governance.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
+          {% elsif post3.category == "Wealth" %}<img src="/assets/images/card-wealth.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
+          {% elsif post3.category == "Mindset" %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
+          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">{% endif %}
+        </div>
+        <div class="news-card__body">
+          <span class="tag tag--{% if post3.category == 'Governance' %}press{% elsif post3.category == 'Mindset' %}story{% elsif post3.category == 'BXC' %}quick{% else %}update{% endif %}">{{ post3.category | upcase | default: "UPDATE" }}</span>
+          <h3 class="news-card__title">{{ post3.title }}</h3>
+          <div class="news-card__meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <time datetime="{{ post3.date | date_to_xmlschema }}">{{ post3.date | date: "%b %-d, %Y" }}</time>
           </div>
-        </a>
-        {% endif %}
-        {% if forloop.index0 >= 3 %}{% break %}{% endif %}
-      {% endfor %}
+        </div>
+      </a>
     </div>
   </div>
 </section>
 
-<!-- MORE FROM NEWSROOM — posts index 4+ in 4-col grid -->
+<!-- MORE FROM NEWSROOM — posts index 4+ using direct array access -->
 <section class="more-section" id="more">
   <div class="more-section__inner">
     <div class="more-header">
@@ -86,26 +102,27 @@ layout: default
     </div>
     <div class="more-grid">
       {% assign imgs = "more-bxc.jpg,more-sakip.jpg,more-leverage.jpg,more-branding.jpg,more-sandwich.jpg,more-ai.jpg,more-pns-bisnis.jpg,more-konsistensi.jpg" | split: "," %}
-      {% assign more_count = 0 %}
-      {% for post in site.posts %}
-        {% if forloop.index0 >= 4 %}
-          {% assign img_idx = more_count | modulo: 8 %}
-          <a href="{{ post.url | relative_url }}" class="more-item">
-            <div class="more-item__img-wrap">
-              {% if post.image %}<img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">
-              {% else %}<img src="/assets/images/{{ imgs[img_idx] }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">{% endif %}
-            </div>
-            <div class="more-item__body">
-              <span class="tag tag--{% if post.category == 'Governance' %}press{% elsif post.category == 'Mindset' %}story{% elsif post.category == 'BXC' %}quick{% else %}update{% endif %}">
-                {% if post.category == 'BXC' %}QUICK READ{% else %}{{ post.category | upcase | default: "UPDATE" }}{% endif %}
-              </span>
-              <h3 class="more-item__title">{{ post.title }}</h3>
-              <time class="more-item__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            </div>
-          </a>
-          {% assign more_count = more_count | plus: 1 %}
-        {% endif %}
-      {% endfor %}
+      {% assign p4  = site.posts[4]  %}{% assign p5  = site.posts[5]  %}
+      {% assign p6  = site.posts[6]  %}{% assign p7  = site.posts[7]  %}
+      {% assign p8  = site.posts[8]  %}{% assign p9  = site.posts[9]  %}
+      {% assign p10 = site.posts[10] %}{% assign p11 = site.posts[11] %}
+      {% assign more_posts = p4, p5, p6, p7, p8, p9, p10, p11 %}
+      {% for post in more_posts %}{% unless post == nil %}
+        {% assign img_idx = forloop.index0 | modulo: 8 %}
+        <a href="{{ post.url | relative_url }}" class="more-item">
+          <div class="more-item__img-wrap">
+            {% if post.image %}<img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">
+            {% else %}<img src="/assets/images/{{ imgs[img_idx] }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">{% endif %}
+          </div>
+          <div class="more-item__body">
+            <span class="tag tag--{% if post.category == 'Governance' %}press{% elsif post.category == 'Mindset' %}story{% elsif post.category == 'BXC' %}quick{% else %}update{% endif %}">
+              {% if post.category == 'BXC' %}QUICK READ{% else %}{{ post.category | upcase | default: "UPDATE" }}{% endif %}
+            </span>
+            <h3 class="more-item__title">{{ post.title }}</h3>
+            <time class="more-item__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          </div>
+        </a>
+      {% endunless %}{% endfor %}
     </div>
     <div class="more-footer-links">
       <a href="{{ '/archive/' | relative_url }}" class="view-all-btn">View All ›</a>
