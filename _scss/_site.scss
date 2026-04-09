@@ -362,3 +362,102 @@ body { padding-top: 0 !important; }
   .post-item__title { font-size: 20px; }
   .post-item { padding-bottom: 48px; }
 }
+
+
+// ── SUBSCRIBE BOX ─────────────────────────────────────────
+.subscribe-box {
+  padding: 12px var(--pad-x) 16px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--divider);
+  max-width: 100%;
+}
+.subscribe-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.subscribe-form label {
+  font-size: 15px;
+  color: var(--text-2);
+  font-style: italic;
+}
+.subscribe-form input[type="email"] {
+  flex: 1;
+  font-size: 15px;
+  font-family: var(--font);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 2px;
+  outline: none;
+  background: var(--bg);
+  color: var(--text);
+  min-width: 180px;
+}
+.subscribe-form input[type="email"]:focus { border-color: var(--text); }
+.subscribe-form button {
+  font-size: 14px;
+  font-family: var(--font);
+  background: var(--text);
+  color: #fff;
+  padding: 6px 16px;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+}
+.subscribe-form button:hover { opacity: 0.8; }
+.cancel-sub { font-size: 14px; color: var(--text-2); text-decoration: none; }
+.cancel-sub:hover { color: var(--text); }
+
+// ── PODCAST BAR ───────────────────────────────────────────
+.available-podcast-container {
+  display: flex;
+  align-items: baseline;
+  gap: 20px;
+  padding: 40px 0 32px;
+  flex-wrap: wrap;
+}
+.podcast-label {
+  font-size: 15px;
+  color: var(--text-2);
+  font-style: italic;
+  flex-shrink: 0;
+}
+.podcast-links {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.podcast-links a {
+  font-size: 15px;
+  color: var(--text-2);
+  text-decoration: none;
+}
+.podcast-links a:hover { color: var(--text); }
+
+// ── VIEW ARCHIVE LINK ─────────────────────────────────────
+.view-archive-link {
+  display: inline-block;
+  margin-bottom: 64px;
+  font-size: 15px;
+  color: var(--text-2);
+  text-decoration: none;
+  font-style: italic;
+}
+.view-archive-link:hover { color: var(--text); }
+
+// ── POST ITEM META (updated) ──────────────────────────────
+.post-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 6px;
+}
+
+.post-item__more .fas {
+  font-size: 10px;
+  vertical-align: middle;
+}
