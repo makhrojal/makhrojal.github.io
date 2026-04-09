@@ -1,21 +1,41 @@
-{{/*
-  nav.al exact nav:
-  - Brand (RED) on LEFT — scrolls with page (NOT fixed)
-  - Links on RIGHT: Archive · About · RSS
-  - NO border-bottom, NO background blur
-*/}}
 <nav class="site-nav" aria-label="Site navigation">
   <a href="{{ '/' | relative_url }}" class="site-nav__brand">{{ site.title }}</a>
   <div class="site-nav__links">
-    <a href="{{ '/archive/' | relative_url }}"
-       {% if page.url contains 'archive' %}class="active"{% endif %}>Archive</a>
-    <a href="{{ '/about/' | relative_url }}"
-       {% if page.url contains 'about' %}class="active"{% endif %}>About</a>
-    <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    <a href="{{ '/archive/' | relative_url }}" {% if page.url contains 'archive' %}class="active"{% endif %}>Archive</a>
+    <a href="https://x.com/makhrojal" target="_blank" rel="noopener noreferrer">Twitter</a>
+    <a href="https://instagram.com/makhrojal" target="_blank" rel="noopener noreferrer">Instagram</a>
+    <a href="#" class="subscribe-toggle" id="subscribe-toggle">Subscribe</a>
   </div>
 </nav>
 
+<div class="subscribe-box" id="subscribe-box" hidden>
+  <form class="subscribe-form" action="{{ '/feed.xml' | relative_url }}" method="get">
+    <label for="sub-email">Subscribe</label>
+    <input type="email" id="sub-email" name="email" placeholder="Email" required autocapitalize="none" />
+    <button type="submit">Subscribe</button>
+    <a href="#" class="cancel-sub" id="cancel-sub">Cancel</a>
+  </form>
+</div>
+
 <script>
+(function(){
+  var toggle = document.getElementById('subscribe-toggle');
+  var box = document.getElementById('subscribe-box');
+  var cancel = document.getElementById('cancel-sub');
+  if (toggle && box) {
+    toggle.addEventListener('click', function(e){
+      e.preventDefault();
+      box.hidden = !box.hidden;
+    });
+  }
+  if (cancel && box) {
+    cancel.addEventListener('click', function(e){
+      e.preventDefault();
+      box.hidden = true;
+    });
+  }
+})();
+
 (function () {
   if (!('IntersectionObserver' in window)) {
     document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('is-visible'); });
