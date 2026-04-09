@@ -6,18 +6,20 @@ layout: default
   <div class="news-section__inner">
     <h1 class="news-section__title">Latest News</h1>
 
-    <!-- HERO ROW -->
+    <!-- HERO ROW — always latest 2 posts automatically -->
     <div class="hero-row">
-      <!-- Hero: Ilmu Spesifik (horizontal split) -->
-      {% assign hero = site.posts | where: "slug", "ilmu-spesifik" | first %}
-      {% unless hero %}{% assign hero = site.posts.first %}{% endunless %}
+      <!-- Hero: post terbaru (index 0) -->
+      {% assign hero = site.posts.first %}
       <a href="{{ hero.url | relative_url }}" class="hero-card" aria-label="{{ hero.title }}">
         <div class="hero-card__img-wrap">
           {% if hero.image %}<img src="{{ hero.image | relative_url }}" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
-          {% else %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">{% endif %}
+          {% elsif hero.category == 'Governance' %}<img src="/assets/images/card-governance.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
+          {% elsif hero.category == 'Wealth' %}<img src="/assets/images/card-wealth.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
+          {% elsif hero.category == 'Mindset' %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
+          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">{% endif %}
         </div>
         <div class="hero-card__body">
-          <span class="tag tag--update">{{ hero.category | upcase | default: "UPDATE" }}</span>
+          <span class="tag tag--{% if hero.category == 'Governance' %}press{% elsif hero.category == 'Mindset' %}story{% elsif hero.category == 'BXC' %}quick{% else %}update{% endif %}">{{ hero.category | upcase | default: "UPDATE" }}</span>
           <h2 class="hero-card__title">{{ hero.title }}</h2>
           <div class="hero-card__meta">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -26,16 +28,18 @@ layout: default
         </div>
       </a>
 
-      <!-- Side card: Kekayaan -->
-      {% assign side = site.posts | where: "slug", "kekayaan-bukan-keberuntungan" | first %}
-      {% unless side %}{% assign side = site.posts[1] %}{% endunless %}
+      <!-- Side card: post terbaru kedua (index 1) -->
+      {% assign side = site.posts[1] %}
       <a href="{{ side.url | relative_url }}" class="side-card" aria-label="{{ side.title }}">
         <div class="side-card__img-wrap">
           {% if side.image %}<img src="{{ side.image | relative_url }}" alt="{{ side.title }}" class="side-card__img" loading="eager">
-          {% else %}<img src="/assets/images/hero-wealth.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">{% endif %}
+          {% elsif side.category == 'Governance' %}<img src="/assets/images/card-governance.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">
+          {% elsif side.category == 'Wealth' %}<img src="/assets/images/card-wealth.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">
+          {% elsif side.category == 'Mindset' %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">
+          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">{% endif %}
         </div>
         <div class="side-card__body">
-          <span class="tag tag--update">{{ side.category | upcase | default: "UPDATE" }}</span>
+          <span class="tag tag--{% if side.category == 'Governance' %}press{% elsif side.category == 'Mindset' %}story{% elsif side.category == 'BXC' %}quick{% else %}update{% endif %}">{{ side.category | upcase | default: "UPDATE" }}</span>
           <h2 class="side-card__title">{{ side.title }}</h2>
           <div class="hero-card__meta">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
@@ -45,7 +49,7 @@ layout: default
       </a>
     </div>
 
-    <!-- 2-COL ROW -->
+    <!-- 2-COL ROW — posts 3 & 4 (index 2 & 3) -->
     <div class="card-row-2">
       {% assign posts_row2 = site.posts | offset: 2 | limit: 2 %}
       {% for post in posts_row2 %}
@@ -79,7 +83,7 @@ layout: default
       <a href="{{ '/archive/' | relative_url }}" class="view-all-link">View archive ›</a>
     </div>
     <div class="more-grid">
-      {% assign more_posts = site.posts | offset: 4 | limit: 8 %}
+      {% assign more_posts = site.posts | offset: 4 | limit: 12 %}
       {% assign imgs = "more-bxc.jpg,more-sakip.jpg,more-leverage.jpg,more-branding.jpg,more-sandwich.jpg,more-ai.jpg,more-pns-bisnis.jpg,more-konsistensi.jpg" | split: "," %}
       {% for post in more_posts %}
       {% assign img_idx = forloop.index0 | modulo: 8 %}
