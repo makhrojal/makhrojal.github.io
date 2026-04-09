@@ -1,16 +1,16 @@
 ---
 layout: home
-title: "Muhammad Makhrojal — Writing"
-description: "Writing about governance, education, and the examined life."
+title: "Kak Ojal — Writing"
+description: "Writing about ideas, growth, and the examined life."
 ---
 
 <section class="hero container">
-  <span class="hero__eyebrow fade-in">Writing by Muhammad Makhrojal</span>
+  <span class="hero__eyebrow fade-in">Writing by Kak Ojal</span>
   <h1 class="hero__title fade-in fade-in--delay-1">
     Ideas worth<br>thinking about.
   </h1>
   <p class="hero__subtitle fade-in fade-in--delay-2">
-    Notes on governance, education, entrepreneurship, and life.
+    Notes on education, ideas, and a life lived with intention.
     No noise. Just thinking.
   </p>
   <a href="#writing" class="hero__cta fade-in fade-in--delay-3">Read the archive &rarr;</a>
@@ -39,10 +39,10 @@ description: "Writing about governance, education, and the examined life."
 
 <section class="about-section" id="about">
   <div class="container">
-    <p class="about-intro">Civil servant. Educator. Entrepreneur.</p>
+    <p class="about-intro">Educator. Writer. Thinker.</p>
     <p class="about-bio">
-      Saya menulis tentang pemerintahan, pendidikan, dan hidup yang dijalani dengan kesadaran penuh.
-      Bukan untuk audiens — untuk berpikir lebih jernih.
+      Saya menulis untuk berpikir lebih jernih — tentang ide, pendidikan,
+      dan hidup yang dijalani dengan kesadaran penuh.
     </p>
     <a href="/about/" class="hero__cta" style="margin-top: 2rem; display: inline-flex;">More about me &rarr;</a>
   </div>

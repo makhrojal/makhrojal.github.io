@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "About"
-description: "About Muhammad Makhrojal — civil servant, educator, and entrepreneur."
+description: "About Kak Ojal — educator, writer, and independent thinker."
 permalink: /about/
 ---
 
@@ -13,19 +13,21 @@ permalink: /about/
   </header>
   <div class="post-body container container--narrow prose">
 
-Saya **Muhammad Makhrojal Nasution**, seorang PNS di Kementerian Perhubungan, pendidik, dan entrepreneur.
+Hai, saya **Kak Ojal** — seorang pendidik, penulis, dan pemikir independen.
 
-Saya percaya bahwa berpikir jernih adalah keterampilan paling langka — dan menulis adalah cara terbaik untuk melatihnya.
+Saya percaya bahwa berpikir jernih adalah keterampilan paling langka di zaman ini. Menulis adalah cara terbaik untuk melatihnya.
 
-## Yang saya kerjakan
+Situs ini adalah tempat saya berpikir keras — tentang ide, pendidikan, keuangan pribadi, dan hidup yang dijalani secara sadar.
 
-- **Kementerian Perhubungan** — evaluasi, kepatuhan, dan tata kelola
-- **Adzkia Kedinasan** — pendidikan persiapan kedinasan di Jakarta Timur dan Bintaro
-- **Konsultasi pajak & legal** — membantu individu dan usaha kecil menavigasi kewajiban mereka
+## Yang saya yakini
 
-## Cara terbaik menghubungi saya
+- Kejernihan berpikir lebih berharga dari kefasihan berbicara
+- Ilmu yang paling berharga adalah yang terasa seperti bermain, bukan bekerja
+- Menulis bukan untuk audiens — menulis untuk memahami
 
-Twitter adalah tempat terbaik untuk memulai percakapan.
+## Menghubungi saya
+
+Saya membaca semua pesan yang masuk. Email adalah cara terbaik untuk memulai percakapan.
 
   </div>
 </article>

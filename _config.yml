@@ -1,13 +1,12 @@
-title:       "Muhammad Makhrojal"
+title:       "Kak Ojal"
 tagline:     "Thinking clearly. Living intentionally."
-description: "Writing about government, business, and the examined life."
+description: "Writing about ideas, growth, and the examined life."
 url:         "https://makhrojal.github.io"
 baseurl:     ""
 
 author:
-  name:     "Muhammad Makhrojal"
-  bio:      "Civil servant. Educator. Entrepreneur."
-  twitter:  "makhrojal"
+  name:     "Kak Ojal"
+  bio:      "Educator. Writer. Thinker."
   email:    ""
 
 markdown:    kramdown
@@ -22,10 +21,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-feed
-
-twitter:
-  username: makhrojal
-  card:     summary_large_image
 
 defaults:
   - scope:
