@@ -1,55 +1,61 @@
 ---
 layout: default
 ---
-{%- assign recent = site.posts | limit: 8 -%}
+{%- assign recent = site.posts | limit: 10 -%}
 
 <div class="page-wrap">
 
-  <!-- Site header — nav.al style large title -->
-  <header class="home-header fade-up">
-    <h1 class="home-header__title">{{ site.title }}</h1>
-    <p class="home-header__tagline">{{ site.description }}</p>
-  </header>
+  {%- comment %} nav.al has NO big homepage title — goes straight to posts {%- endcomment %}
+  <div class="home-intro fade-up">
+    <p class="home-intro__tagline">{{ site.description }}</p>
+  </div>
 
-  <!-- Post list — Apple Security Research style, no images -->
-  <div class="post-list" id="post-list">
+  <div class="post-list">
     {%- for post in recent -%}
-      {%- assign cat_cls = post.category | downcase | default: 'default' -%}
-      <a href="{{ post.url | relative_url }}"
-         class="post-list-item fade-up"
-         data-category="{{ post.category }}">
-        <div class="post-list-item__meta">
-          <time class="post-list-item__date"
-                datetime="{{ post.date | date_to_xmlschema }}">
-            {{ post.date | date: "%b %-d, %Y" }}
-          </time>
-          {%- if post.category -%}
-          <span class="post-list-item__cat post-list-item__cat--{{ cat_cls }}">
-            {{ post.category }}
+      {%- assign cat_lower = post.category | downcase -%}
+      {%- assign exc = post.subtitle | default: post.excerpt | strip_html | truncate: 200 -%}
+      <div class="post-item fade-up" data-category="{{ post.category }}">
+
+        {{- comment -}} Title links to article {{- endcomment -}}
+        <a href="{{ post.url | relative_url }}" class="post-item__title">{{ post.title }}</a>
+
+        {%- if post.subtitle -%}
+        <span class="post-item__subtitle">{{ post.subtitle }}</span>
+        {%- endif -%}
+
+        {%- if post.excerpt -%}
+        <div class="post-item__excerpt-wrap">
+          <span class="post-item__excerpt">
+            {{- post.excerpt | strip_html | truncate: 220 -}}
           </span>
+          <a href="{{ post.url | relative_url }}" class="post-item__more">More ›</a>
+        </div>
+        {%- endif -%}
+
+        {{- comment -}} Meta row — date at bottom like nav.al {{- endcomment -}}
+        <div class="post-item__meta">
+          {%- if post.category -%}
+          <a href="{{ '/archive/?category=' | append: post.category | relative_url }}"
+             class="post-item__cat">{{ post.category }}</a>
+          <span class="post-item__sep">·</span>
+          {%- endif -%}
+          <time class="post-item__date"
+                datetime="{{ post.date | date_to_xmlschema }}">
+            {{ post.date | date: "%b %-d %Y" }}
+          </time>
+          {%- if post.reading_time -%}
+          <span class="post-item__sep">·</span>
+          <span class="post-item__date">{{ post.reading_time }} min</span>
           {%- endif -%}
         </div>
-        <h2 class="post-list-item__title">{{ post.title }}</h2>
-        {%- if post.subtitle -%}
-        <p class="post-list-item__excerpt">{{ post.subtitle }}</p>
-        {%- else -%}
-          {%- assign _exc = post.excerpt | strip_html | truncate: 120 -%}
-          {%- if _exc.size > 1 -%}
-          <p class="post-list-item__excerpt">{{ _exc }}</p>
-          {%- endif -%}
-        {%- endif -%}
-      </a>
+
+      </div>
     {%- endfor -%}
   </div>
 
-  {%- if site.posts.size > 8 -%}
-  <a href="{{ '/archive/' | relative_url }}" class="view-all fade-up">
-    View all {{ site.posts.size }} articles →
-  </a>
-  {%- else -%}
-  <a href="{{ '/archive/' | relative_url }}" class="view-all fade-up">
+  <a href="{{ '/archive/' | relative_url }}"
+     style="display:inline-block;margin-bottom:64px;font-size:15px;color:#86868b;">
     View archive →
   </a>
-  {%- endif -%}
 
 </div>

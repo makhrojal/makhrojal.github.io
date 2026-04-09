@@ -1,44 +1,33 @@
+{{/*
+  nav.al exact nav:
+  - Brand (RED) on LEFT — scrolls with page (NOT fixed)
+  - Links on RIGHT: Archive · About · RSS
+  - NO border-bottom, NO background blur
+*/}}
 <nav class="site-nav" aria-label="Site navigation">
-  <div class="site-nav__inner">
-    <a href="{{ '/' | relative_url }}" class="site-nav__brand">{{ site.title }}</a>
-    <div class="site-nav__links">
-      <a href="{{ '/archive/' | relative_url }}"
-         class="{% if page.url == '/archive/' %}active{% endif %}">Archive</a>
-      <a href="{{ '/about/' | relative_url }}"
-         class="{% if page.url == '/about/' %}active{% endif %}">About</a>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-    </div>
+  <a href="{{ '/' | relative_url }}" class="site-nav__brand">{{ site.title }}</a>
+  <div class="site-nav__links">
+    <a href="{{ '/archive/' | relative_url }}"
+       {% if page.url contains 'archive' %}class="active"{% endif %}>Archive</a>
+    <a href="{{ '/about/' | relative_url }}"
+       {% if page.url contains 'about' %}class="active"{% endif %}>About</a>
+    <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
   </div>
 </nav>
 
 <script>
 (function () {
-  // Fade-up on scroll
   if (!('IntersectionObserver' in window)) {
-    document.querySelectorAll('.fade-up').forEach(function (el) {
-      el.classList.add('is-visible');
-    });
+    document.querySelectorAll('.fade-up').forEach(function(el){ el.classList.add('is-visible'); });
     return;
   }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        io.unobserve(entry.target);
-      }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) { entry.target.classList.add('is-visible'); io.unobserve(entry.target); }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -24px 0px' });
-
-  // Run after DOM ready
-  function observe() {
-    document.querySelectorAll('.fade-up').forEach(function (el) {
-      io.observe(el);
-    });
-  }
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', observe);
-  } else {
-    observe();
-  }
+  }, { threshold: 0.06, rootMargin: '0px 0px -20px 0px' });
+  function observe() { document.querySelectorAll('.fade-up').forEach(function(el){ io.observe(el); }); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', observe);
+  else observe();
 })();
 </script>

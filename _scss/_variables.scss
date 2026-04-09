@@ -1,50 +1,27 @@
 // ============================================================
-// VARIABLES — Apple Security Research + nav.al DNA
-// White, clean, typography-first
+// VARIABLES — nav.al pixel-exact
 // ============================================================
-
 :root {
-  // Surfaces
-  --bg:         #ffffff;
-  --bg-subtle:  #f9f9f9;
-  --divider:    #e5e5e5;
-  --border:     #d2d2d7;
+  --bg:       #fdfdfd;    // nav.al off-white
+  --bg-code:  #f2f2f7;
+  --divider:  #e5e5e5;
+  --border:   #d2d2d7;
 
-  // Text
-  --text:       #1d1d1f;
-  --text-2:     #6e6e73;
-  --text-3:     #aeaeb2;
-  --link:       #0066cc;
+  --text:     #000000;    // nav.al pure black
+  --text-2:   #86868b;    // nav.al muted grey (links, meta, excerpt)
+  --text-3:   #aeaeb2;
+  --link:     #86868b;    // nav.al — links are grey, not blue
+  --link-red: #e30613;    // brand red (Naval brand color)
 
-  // Category colors (no images needed — color carries identity)
-  --c-governance: #0066cc;
-  --c-wealth:     #1c7c3c;
-  --c-mindset:    #7b3fc4;
-  --c-bxc:        #c45000;
-
-  // Font stacks
   --font:         -apple-system, BlinkMacSystemFont, "SF Pro Text",
                   "Helvetica Neue", Arial, sans-serif;
   --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
                   "Helvetica Neue", Arial, sans-serif;
   --font-mono:    "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
 
-  // Rhythm
-  --space-1:  4px;
-  --space-2:  8px;
-  --space-3:  12px;
-  --space-4:  16px;
-  --space-6:  24px;
-  --space-8:  32px;
-  --space-12: 48px;
-  --space-16: 64px;
+  --max-w:  580px;          // nav.al content column width
+  --pad-x:  clamp(20px, 5vw, 40px);
 
-  // Layout
-  --max-w:    760px;
-  --pad-x:    clamp(20px, 5vw, 40px);
-
-  // Transitions
-  --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
-  --fast:     160ms;
-  --mid:      280ms;
+  --ease:   cubic-bezier(0.25, 0.1, 0.25, 1);
+  --fast:   160ms;
 }
