@@ -1,151 +1,50 @@
 // ============================================================
-// VARIABLES — Apple Design System DNA
-// Pixel-audited against apple.com/sg/newsroom/
-// All values verified via DevTools inspection
+// VARIABLES — Apple Security Research + nav.al DNA
+// White, clean, typography-first
 // ============================================================
 
-:root, [data-theme="light"] {
+:root {
+  // Surfaces
+  --bg:         #ffffff;
+  --bg-subtle:  #f9f9f9;
+  --divider:    #e5e5e5;
+  --border:     #d2d2d7;
 
-  // ── SURFACES ─────────────────────────────────────────────
-  // Apple alternates: #ffffff (white sections) / #f5f5f7 (grey sections)
-  --color-bg:              #f5f5f7;   // page bg + grey sections
-  --color-surface:         #ffffff;   // white sections
-  --color-surface-2:       #fbfbfd;   // subtle tinted white
-  --color-surface-offset:  #e8e8ed;   // input bg, code bg
-  --color-divider:         #d2d2d7;   // hr, card separator lines
-  --color-border:          #d2d2d7;
+  // Text
+  --text:       #1d1d1f;
+  --text-2:     #6e6e73;
+  --text-3:     #aeaeb2;
+  --link:       #0066cc;
 
-  // ── TEXT ────────────────────────────────────────────────
-  // Apple exact:
-  //   #1d1d1f — near-black primary (NOT pure #000)
-  //   #6e6e73 — mid-grey secondary (NOT #999)
-  //   #aeaeb2 — light tertiary (dates, captions)
-  --color-text:            #1d1d1f;
-  --color-text-secondary:  #6e6e73;
-  --color-text-tertiary:   #aeaeb2;
-  --color-text-inverse:    #f5f5f7;
+  // Category colors (no images needed — color carries identity)
+  --c-governance: #0066cc;
+  --c-wealth:     #1c7c3c;
+  --c-mindset:    #7b3fc4;
+  --c-bxc:        #c45000;
 
-  // ── ACCENT ──────────────────────────────────────────────
-  --color-accent:          #0071e3;   // Apple CTA blue (exact)
-  --color-accent-hover:    #0077ed;
-  --color-accent-active:   #006edb;
+  // Font stacks
+  --font:         -apple-system, BlinkMacSystemFont, "SF Pro Text",
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
+                  "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "SF Mono", ui-monospace, Menlo, Monaco, Consolas, monospace;
 
-  // ── FONT STACKS ──────────────────────────────────────────
-  // SF Pro Display = headings/large text
-  // SF Pro Text    = body/small text
-  // Fallback chain matches Apple's own CSS
-  --font-sf-display: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-                     "Helvetica Neue", Arial, sans-serif;
-  --font-sf:         -apple-system, BlinkMacSystemFont, "SF Pro Text",
-                     "Helvetica Neue", Arial, sans-serif;
-  --font-mono:       "SF Mono", ui-monospace, Menlo, Monaco,
-                     "Cascadia Mono", "Segoe UI Mono", Consolas, monospace;
+  // Rhythm
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-6:  24px;
+  --space-8:  32px;
+  --space-12: 48px;
+  --space-16: 64px;
 
-  // Canonical aliases (used by all components)
-  --font-display:    var(--font-sf-display);
-  --font-text:       var(--font-sf);
+  // Layout
+  --max-w:    760px;
+  --pad-x:    clamp(20px, 5vw, 40px);
 
-  // ── TYPE SCALE — Apple HIG exact ─────────────────────────
-  // Audited against apple.com/sg/newsroom/ via DevTools
-  --text-caption:   11px;    // tags, labels, small meta
-  --text-footnote:  12px;    // dates, footnotes, captions
-  --text-callout:   14px;    // card excerpts, secondary text
-  --text-body:      17px;    // body prose (Apple standard)
-  --text-headline:  17px;    // callout headers (semibold)
-  --text-title3:    19px;    // card titles (2-col row)
-  --text-title2:    24px;    // section titles "More from Newsroom"
-  --text-title1:    28px;    // page h1 on inner pages
-  --text-hero:      clamp(28px, 3.5vw, 48px); // hero card title
-  --text-display:   clamp(40px, 6vw, 80px);   // display/marketing text
-
-  // ── LETTER SPACING — Apple exact ─────────────────────────
-  --tracking-display: -0.045em;
-  --tracking-title1:  -0.025em;
-  --tracking-title2:  -0.022em;
-  --tracking-title3:  -0.016em;
-  --tracking-headline: -0.016em;
-  --tracking-body:    0em;
-  --tracking-caption: 0.007em;
-
-  // ── LINE HEIGHT ──────────────────────────────────────────
-  --leading-tight:   1.05;
-  --leading-title:   1.1;
-  --leading-heading: 1.15;
-  --leading-body:    1.65;
-  --leading-loose:   1.8;
-
-  // ── SPACING SYSTEM (8pt grid) ────────────────────────────
-  --space-1:   4px;
-  --space-2:   8px;
-  --space-3:   12px;
-  --space-4:   16px;
-  --space-5:   20px;
-  --space-6:   24px;
-  --space-8:   32px;
-  --space-10:  40px;
-  --space-12:  48px;
-  --space-16:  64px;
-  --space-20:  80px;
-  --space-24:  96px;
-  --space-32: 128px;
-
-  // ── LAYOUT ───────────────────────────────────────────────
-  // Apple Newsroom: max content width ~1200px w/ 22px side padding
-  --width-content:    980px;
-  --width-article:    692px;
-  --width-wide:      1200px;
-  // Apple: padding increases from 22px (mobile) to 22px (desktop 1200px container)
-  // At viewport=1440px: (1440-1200)/2 = 120px auto margins
-  --padding-x:        clamp(22px, 4.5vw, 48px);
-
-  // ── RADIUS — Apple exact ─────────────────────────────────
-  --radius-sm:   4px;
-  --radius-md:   8px;
-  --radius-lg:  12px;
-  --radius-xl:  18px;   // hero/news cards (Apple audit: 18px)
-  --radius-2xl: 24px;
-  --radius-full: 9999px;
-
-  // ── SHADOWS — Apple exact ─────────────────────────────────
-  // Apple cards use very subtle multi-layer shadows
-  --shadow-sm:   0 1px 3px rgba(0, 0, 0, 0.06);
-  --shadow-md:   0 4px 16px rgba(0, 0, 0, 0.06);
-  --shadow-lg:   0 12px 40px rgba(0, 0, 0, 0.08);
-  --shadow-card:       0 2px 8px rgba(0,0,0,0.06), 0 8px 24px rgba(0,0,0,0.04);
-  --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.08), 0 16px 48px rgba(0,0,0,0.07);
-
-  // ── TRANSITIONS — Apple exact cubic-bezier ────────────────
-  --ease-apple:    cubic-bezier(0.25, 0.1, 0.25, 1);
-  --ease-out:      cubic-bezier(0.0, 0.0, 0.2, 1);
-  --ease-spring:   cubic-bezier(0.34, 1.56, 0.64, 1);
-  --duration-fast: 160ms;
-  --duration-mid:  240ms;
-  --duration-slow: 400ms;
-  --transition:    var(--duration-mid) var(--ease-apple);
-
-  // ── NAV ──────────────────────────────────────────────────
-  --nav-global-bg:  #1d1d1f;
-  --nav-global-h:   44px;
-  --nav-local-h:    52px;
-  --nav-bg:         rgba(255, 255, 255, 0.85);
-  --nav-blur:       blur(20px) saturate(180%);
-  --nav-border:     rgba(0, 0, 0, 0.08);
-}
-
-// ── DARK MODE ─────────────────────────────────────────────
-[data-theme="dark"] {
-  --color-bg:              #000000;
-  --color-surface:         #1c1c1e;
-  --color-surface-2:       #2c2c2e;
-  --color-surface-offset:  #3a3a3c;
-  --color-divider:         #38383a;
-  --color-border:          #38383a;
-  --color-text:            #f5f5f7;
-  --color-text-secondary:  #98989d;
-  --color-text-tertiary:   #636366;
-  --color-text-inverse:    #1d1d1f;
-  --color-accent:          #2997ff;
-  --nav-global-bg:         #1d1d1f;
-  --nav-bg:                rgba(28, 28, 30, 0.85);
-  --nav-border:            rgba(255, 255, 255, 0.08);
+  // Transitions
+  --ease:     cubic-bezier(0.25, 0.1, 0.25, 1);
+  --fast:     160ms;
+  --mid:      280ms;
 }
