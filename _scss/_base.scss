@@ -1,5 +1,6 @@
 // ============================================================
-// BASE RESET — Apple-grade foundation — FLAT (no nesting)
+// BASE RESET — Apple-grade foundation
+// FLAT CSS — no SCSS nesting (LibSass compat)
 // ============================================================
 
 *,
@@ -17,19 +18,19 @@ html {
   -webkit-text-size-adjust: none;
   text-size-adjust: none;
   scroll-behavior: smooth;
-  scroll-padding-top: calc(44px + 52px + 16px);
+  // push anchor-scroll targets below fixed double nav (44+52+8 safety)
+  scroll-padding-top: 104px;
   font-size: 16px;
 }
 
 body {
   min-height: 100dvh;
-  /* Fixed global nav (44px) + sticky local nav (52px) */
-  padding-top: calc(var(--nav-global-h, 44px) + var(--nav-local-h, 52px));
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-sf);
-  font-size: var(--text-body);
-  line-height: var(--leading-body);
+  // body padding-top is controlled solely by _layout.scss
+  background-color: #ffffff;     // default white — sections apply their own bg
+  color: #1d1d1f;
+  font-family: var(--font-text);
+  font-size: 17px;
+  line-height: 1.65;
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
   font-variant-ligatures: common-ligatures contextual;
   transition:
@@ -37,11 +38,14 @@ body {
     color 240ms cubic-bezier(0.25,0.1,0.25,1);
 }
 
+// Prevent img/video from overflowing containers
 img, picture, video, canvas, svg {
   display: block;
   max-width: 100%;
-  height: auto;
 }
+
+// Don't set height: auto globally — breaks aspect-ratio covers
+img { height: auto; }
 
 ul, ol { list-style: none; }
 
@@ -50,64 +54,52 @@ input, button, textarea, select {
   color: inherit;
 }
 
-button {
-  cursor: pointer;
-  background: none;
-  border: none;
-}
+button { cursor: pointer; background: none; border: none; }
 
+// Headings: SF Pro Display, -tracking, tight leading
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-sf-display);
+  font-family: var(--font-display);
   font-weight: 700;
-  line-height: var(--leading-title, 1.1);
+  line-height: 1.1;
   text-wrap: balance;
-  color: var(--color-text);
+  color: #1d1d1f;
 }
 
-p, li, figcaption {
+// Paragraphs: comfortable reading line length
+p {
   text-wrap: pretty;
-  max-width: 70ch;
+  line-height: 1.65;
 }
 
+// Default links — suppress underline, Apple blue on content links
 a {
-  color: var(--color-accent);
+  color: #0071e3;
   text-decoration: none;
-  transition: opacity var(--transition);
 }
 a:hover { opacity: 0.75; }
 
+// Cards and nav links override this per-component (color: inherit)
+
 ::selection {
   background: rgba(0,113,227,0.18);
-  color: var(--color-text);
+  color: #1d1d1f;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-accent);
+  outline: 2px solid #0071e3;
   outline-offset: 3px;
-  border-radius: var(--radius-sm, 4px);
+  border-radius: 4px;
 }
-
-.skip-link {
-  position: absolute;
-  top: -40px;
-  left: 0;
-  background: var(--color-text);
-  color: var(--color-bg);
-  padding: 8px 16px;
-  z-index: 200;
-  font-size: var(--text-body);
-  transition: top 160ms cubic-bezier(0.25,0.1,0.25,1);
-}
-.skip-link:focus { top: 0; }
 
 hr {
   border: none;
-  border-top: 1px solid var(--color-divider);
-  margin: var(--space-12, 48px) 0;
+  border-top: 1px solid #d2d2d7;
+  margin: 48px 0;
 }
 
 table { border-collapse: collapse; width: 100%; }
 
+// Accessibility: respect reduced-motion preference
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -115,4 +107,6 @@ table { border-collapse: collapse; width: 100%; }
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+  // Keep reveal elements visible even without animation
+  .reveal-on-scroll { opacity: 1 !important; transform: none !important; }
 }

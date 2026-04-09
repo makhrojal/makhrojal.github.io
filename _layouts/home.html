@@ -1,90 +1,92 @@
 ---
 layout: default
 ---
-<!-- LATEST NEWS -->
+{%- assign hero   = site.posts[0] -%}
+{%- assign post2  = site.posts[1] -%}
+{%- assign post3  = site.posts[2] -%}
+
+{%- comment -%} Image helper macro — category-aware fallback {%- endcomment -%}
+{%- assign _cat_imgs = "Governance:card-governance.jpg,Wealth:card-wealth.jpg,Mindset:hero-knowledge.jpg,BXC:more-bxc.jpg" | split: "," -%}
+
+<!-- ── LATEST NEWS — white background section ── -->
 <section class="news-section" id="latest">
   <div class="news-section__inner">
-    <h1 class="news-section__title">Latest News</h1>
+    <h2 class="news-section__title">Latest News</h2>
 
-    <!-- HERO ROW — always latest 2 posts automatically -->
-    <div class="hero-row">
-      <!-- Hero: post terbaru (index 0) -->
-      {% assign hero = site.posts.first %}
+    <!-- ROW 1: Single full-width hero card -->
+    <div class="hero-row reveal-on-scroll">
+      {%- if hero.image -%}
+        {%- assign _hero_img = hero.image -%}
+      {%- elsif hero.category == 'Governance' -%}
+        {%- assign _hero_img = '/assets/images/card-governance.jpg' -%}
+      {%- elsif hero.category == 'Wealth' -%}
+        {%- assign _hero_img = '/assets/images/card-wealth.jpg' -%}
+      {%- elsif hero.category == 'Mindset' -%}
+        {%- assign _hero_img = '/assets/images/hero-knowledge.jpg' -%}
+      {%- else -%}
+        {%- assign _hero_img = '/assets/images/more-bxc.jpg' -%}
+      {%- endif -%}
       <a href="{{ hero.url | relative_url }}" class="hero-card" aria-label="{{ hero.title }}">
         <div class="hero-card__img-wrap">
-          {% if hero.image %}<img src="{{ hero.image | relative_url }}" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
-          {% elsif hero.category == 'Governance' %}<img src="/assets/images/card-governance.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
-          {% elsif hero.category == 'Wealth' %}<img src="/assets/images/card-wealth.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
-          {% elsif hero.category == 'Mindset' %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
-          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">{% endif %}
+          <img src="{{ _hero_img | relative_url }}" alt="{{ hero.title }}" class="hero-card__img" fetchpriority="high" width="800" height="450">
         </div>
         <div class="hero-card__body">
-          <span class="tag tag--{% if hero.category == 'Governance' %}press{% elsif hero.category == 'Mindset' %}story{% elsif hero.category == 'BXC' %}quick{% else %}update{% endif %}">{{ hero.category | upcase | default: "UPDATE" }}</span>
-          <h2 class="hero-card__title">{{ hero.title }}</h2>
+          {%- assign _hero_tag = hero.category | upcase | default: 'NEWS' -%}
+          <span class="eyebrow-tag">{{ _hero_tag }}</span>
+          <h3 class="hero-card__title">{{ hero.title }}</h3>
+          {% if hero.subtitle %}<p class="hero-card__excerpt">{{ hero.subtitle }}</p>{% endif %}
           <div class="hero-card__meta">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <time datetime="{{ hero.date | date_to_xmlschema }}">{{ hero.date | date: "%b %-d, %Y" }}</time>
-          </div>
-        </div>
-      </a>
-
-      <!-- Side card: post terbaru kedua (index 1) -->
-      {% assign side = site.posts[1] %}
-      <a href="{{ side.url | relative_url }}" class="side-card" aria-label="{{ side.title }}">
-        <div class="side-card__img-wrap">
-          {% if side.image %}<img src="{{ side.image | relative_url }}" alt="{{ side.title }}" class="side-card__img" loading="eager">
-          {% elsif side.category == 'Governance' %}<img src="/assets/images/card-governance.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">
-          {% elsif side.category == 'Wealth' %}<img src="/assets/images/card-wealth.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">
-          {% elsif side.category == 'Mindset' %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">
-          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">{% endif %}
-        </div>
-        <div class="side-card__body">
-          <span class="tag tag--{% if side.category == 'Governance' %}press{% elsif side.category == 'Mindset' %}story{% elsif side.category == 'BXC' %}quick{% else %}update{% endif %}">{{ side.category | upcase | default: "UPDATE" }}</span>
-          <h2 class="side-card__title">{{ side.title }}</h2>
-          <div class="hero-card__meta">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-            <time datetime="{{ side.date | date_to_xmlschema }}">{{ side.date | date: "%b %-d, %Y" }}</time>
           </div>
         </div>
       </a>
     </div>
 
-    <!-- 2-COL ROW — posts index 2 & 3 using direct array access -->
-    <div class="card-row-2">
-      {% assign post2 = site.posts[2] %}
-      {% assign post3 = site.posts[3] %}
-
+    <!-- ROW 2: Two side-by-side cards (50/50) -->
+    <div class="card-row-2 reveal-on-scroll">
+      {%- if post2.image -%}
+        {%- assign _p2_img = post2.image -%}
+      {%- elsif post2.category == 'Governance' -%}
+        {%- assign _p2_img = '/assets/images/card-governance.jpg' -%}
+      {%- elsif post2.category == 'Wealth' -%}
+        {%- assign _p2_img = '/assets/images/card-wealth.jpg' -%}
+      {%- elsif post2.category == 'Mindset' -%}
+        {%- assign _p2_img = '/assets/images/hero-knowledge.jpg' -%}
+      {%- else -%}
+        {%- assign _p2_img = '/assets/images/more-bxc.jpg' -%}
+      {%- endif -%}
       <a href="{{ post2.url | relative_url }}" class="news-card">
         <div class="news-card__img-wrap">
-          {% if post2.image %}<img src="{{ post2.image | relative_url }}" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
-          {% elsif post2.category == "Governance" %}<img src="/assets/images/card-governance.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
-          {% elsif post2.category == "Wealth" %}<img src="/assets/images/card-wealth.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
-          {% elsif post2.category == "Mindset" %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">
-          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ post2.title }}" class="news-card__img" loading="lazy">{% endif %}
+          <img src="{{ _p2_img | relative_url }}" alt="{{ post2.title }}" class="news-card__img" loading="lazy" decoding="async" width="600" height="338">
         </div>
         <div class="news-card__body">
-          <span class="tag tag--{% if post2.category == 'Governance' %}press{% elsif post2.category == 'Mindset' %}story{% elsif post2.category == 'BXC' %}quick{% else %}update{% endif %}">{{ post2.category | upcase | default: "UPDATE" }}</span>
+          <span class="eyebrow-tag">{{ post2.category | upcase | default: 'NEWS' }}</span>
           <h3 class="news-card__title">{{ post2.title }}</h3>
           <div class="news-card__meta">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <time datetime="{{ post2.date | date_to_xmlschema }}">{{ post2.date | date: "%b %-d, %Y" }}</time>
           </div>
         </div>
       </a>
 
+      {%- if post3.image -%}
+        {%- assign _p3_img = post3.image -%}
+      {%- elsif post3.category == 'Governance' -%}
+        {%- assign _p3_img = '/assets/images/card-governance.jpg' -%}
+      {%- elsif post3.category == 'Wealth' -%}
+        {%- assign _p3_img = '/assets/images/card-wealth.jpg' -%}
+      {%- elsif post3.category == 'Mindset' -%}
+        {%- assign _p3_img = '/assets/images/hero-knowledge.jpg' -%}
+      {%- else -%}
+        {%- assign _p3_img = '/assets/images/more-bxc.jpg' -%}
+      {%- endif -%}
       <a href="{{ post3.url | relative_url }}" class="news-card">
         <div class="news-card__img-wrap">
-          {% if post3.image %}<img src="{{ post3.image | relative_url }}" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
-          {% elsif post3.category == "Governance" %}<img src="/assets/images/card-governance.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
-          {% elsif post3.category == "Wealth" %}<img src="/assets/images/card-wealth.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
-          {% elsif post3.category == "Mindset" %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">
-          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ post3.title }}" class="news-card__img" loading="lazy">{% endif %}
+          <img src="{{ _p3_img | relative_url }}" alt="{{ post3.title }}" class="news-card__img" loading="lazy" decoding="async" width="600" height="338">
         </div>
         <div class="news-card__body">
-          <span class="tag tag--{% if post3.category == 'Governance' %}press{% elsif post3.category == 'Mindset' %}story{% elsif post3.category == 'BXC' %}quick{% else %}update{% endif %}">{{ post3.category | upcase | default: "UPDATE" }}</span>
+          <span class="eyebrow-tag">{{ post3.category | upcase | default: 'NEWS' }}</span>
           <h3 class="news-card__title">{{ post3.title }}</h3>
           <div class="news-card__meta">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <time datetime="{{ post3.date | date_to_xmlschema }}">{{ post3.date | date: "%b %-d, %Y" }}</time>
           </div>
         </div>
@@ -93,37 +95,67 @@ layout: default
   </div>
 </section>
 
-<!-- MORE FROM NEWSROOM — posts index 4+ using concat to build array -->
+<!-- ── MORE FROM NEWSROOM — grey (#f5f5f7) background section ── -->
 <section class="more-section" id="more">
   <div class="more-section__inner">
-    <div class="more-header">
+    <div class="more-header reveal-on-scroll">
       <h2 class="more-title">More from Newsroom</h2>
-      <a href="{{ '/archive/' | relative_url }}" class="view-all-link">View archive ›</a>
+      <a href="{{ '/archive/' | relative_url }}" class="view-all-link">View Archive ›</a>
     </div>
+
+    {%- assign imgs = "more-bxc.jpg,more-sakip.jpg,more-leverage.jpg,more-branding.jpg,more-sandwich.jpg,more-ai.jpg,more-pns-bisnis.jpg,more-konsistensi.jpg" | split: "," -%}
+    {%- assign more_posts = site.posts | where_exp: "p", "p.id != hero.id and p.id != post2.id and p.id != post3.id" -%}
+
     <div class="more-grid">
-      {% assign imgs = "more-bxc.jpg,more-sakip.jpg,more-leverage.jpg,more-branding.jpg,more-sandwich.jpg,more-ai.jpg,more-pns-bisnis.jpg,more-konsistensi.jpg" | split: "," %}
-      {% assign more_posts = site.posts | where_exp: "post", "post.id != hero.id and post.id != side.id and post.id != post2.id and post.id != post3.id" %}
-      {% for post in more_posts %}
-        {% assign img_idx = forloop.index0 | modulo: 8 %}
-        <a href="{{ post.url | relative_url }}" class="more-item">
+      {%- for post in more_posts -%}
+        {%- assign img_idx = forloop.index0 | modulo: 8 -%}
+        {%- if post.image -%}
+          {%- assign _more_img = post.image -%}
+        {%- else -%}
+          {%- assign _more_img_name = imgs[img_idx] -%}
+          {%- assign _more_img = '/assets/images/' | append: _more_img_name -%}
+        {%- endif -%}
+        <a href="{{ post.url | relative_url }}" class="more-item reveal-on-scroll" style="--delay: {{ forloop.index0 | modulo: 4 | times: 80 }}ms">
           <div class="more-item__img-wrap">
-            {% if post.image %}<img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">
-            {% else %}<img src="/assets/images/{{ imgs[img_idx] }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">{% endif %}
+            <img src="{{ _more_img | relative_url }}" alt="{{ post.title }}" class="more-item__img" loading="lazy" decoding="async" width="400" height="225">
           </div>
           <div class="more-item__body">
-            <span class="tag tag--{% if post.category == 'Governance' %}press{% elsif post.category == 'Mindset' %}story{% elsif post.category == 'BXC' %}quick{% else %}update{% endif %}">
-              {% if post.category == 'BXC' %}QUICK READ{% else %}{{ post.category | upcase | default: "UPDATE" }}{% endif %}
-            </span>
+            <span class="eyebrow-tag eyebrow-tag--small">{{ post.category | upcase | default: 'NEWS' }}</span>
             <h3 class="more-item__title">{{ post.title }}</h3>
             <time class="more-item__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
           </div>
         </a>
-      {% endfor %}
+      {%- endfor -%}
     </div>
-    <div class="more-footer-links">
-      <a href="{{ '/archive/' | relative_url }}" class="view-all-btn">View All ›</a>
-      <a href="{{ '/archive/' | relative_url }}" class="archive-link">View Archive ›</a>
+
+    <div class="more-cta reveal-on-scroll">
+      <a href="{{ '/archive/' | relative_url }}" class="cta-link">View All Articles ›</a>
     </div>
   </div>
 </section>
 
+<script>
+(function () {
+  // Intersection Observer for reveal-on-scroll
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal-on-scroll').forEach(function(el) {
+      el.classList.add('is-visible');
+    });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        var delay = entry.target.style.getPropertyValue('--delay') || '0ms';
+        entry.target.style.transitionDelay = delay;
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal-on-scroll').forEach(function(el) {
+    io.observe(el);
+  });
+})();
+</script>
