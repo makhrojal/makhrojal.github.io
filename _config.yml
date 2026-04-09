@@ -34,10 +34,6 @@ defaults:
     values:
       layout: "default"
 
-sass:
-  sass_dir: _scss
-  style:    compressed
-
 feed:
   path: feed.xml
 
