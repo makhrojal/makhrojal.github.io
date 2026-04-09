@@ -4,19 +4,27 @@ layout: default
 {%- assign recent = site.posts | limit: 10 -%}
 
 <div class="page-wrap">
-
-  {%- comment %} nav.al has NO big homepage title — goes straight to posts {%- endcomment %}
-  <div class="home-intro fade-up">
-    <p class="home-intro__tagline">{{ site.description }}</p>
+  <div class="available-podcast-container fade-up">
+    <div class="podcast-label">Podcast</div>
+    <div class="podcast-links">
+      <a href="https://podcasts.apple.com" target="_blank" rel="noopener noreferrer">Apple</a>
+      <a href="{{ '/feed.xml' | relative_url }}">Email</a>
+      <a href="https://open.spotify.com" target="_blank" rel="noopener noreferrer">Spotify</a>
+      <a href="https://youtube.com/@makhrojal" target="_blank" rel="noopener noreferrer">YouTube</a>
+    </div>
   </div>
 
   <div class="post-list">
     {%- for post in recent -%}
-      {%- assign cat_lower = post.category | downcase -%}
-      {%- assign exc = post.subtitle | default: post.excerpt | strip_html | truncate: 200 -%}
       <div class="post-item fade-up" data-category="{{ post.category }}">
+        <div class="post-item__meta">
+          <time class="post-item__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d %Y" }}</time>
+          {%- if post.category -%}
+          <span class="post-item__sep">&middot;</span>
+          <a href="{{ '/archive/?category=' | append: post.category | relative_url }}" class="post-item__cat">{{ post.category }}</a>
+          {%- endif -%}
+        </div>
 
-        {{- comment -}} Title links to article {{- endcomment -}}
         <a href="{{ post.url | relative_url }}" class="post-item__title">{{ post.title }}</a>
 
         {%- if post.subtitle -%}
@@ -25,37 +33,12 @@ layout: default
 
         {%- if post.excerpt -%}
         <div class="post-item__excerpt-wrap">
-          <span class="post-item__excerpt">
-            {{- post.excerpt | strip_html | truncate: 220 -}}
-          </span>
-          <a href="{{ post.url | relative_url }}" class="post-item__more">More ›</a>
+          <span class="post-item__excerpt">{{ post.excerpt | strip_html | truncate: 220 }}</span><a href="{{ post.url | relative_url }}" class="post-item__more"> More <i class="fas fa-chevron-right"></i></a>
         </div>
         {%- endif -%}
-
-        {{- comment -}} Meta row — date at bottom like nav.al {{- endcomment -}}
-        <div class="post-item__meta">
-          {%- if post.category -%}
-          <a href="{{ '/archive/?category=' | append: post.category | relative_url }}"
-             class="post-item__cat">{{ post.category }}</a>
-          <span class="post-item__sep">·</span>
-          {%- endif -%}
-          <time class="post-item__date"
-                datetime="{{ post.date | date_to_xmlschema }}">
-            {{ post.date | date: "%b %-d %Y" }}
-          </time>
-          {%- if post.reading_time -%}
-          <span class="post-item__sep">·</span>
-          <span class="post-item__date">{{ post.reading_time }} min</span>
-          {%- endif -%}
-        </div>
-
       </div>
     {%- endfor -%}
   </div>
 
-  <a href="{{ '/archive/' | relative_url }}"
-     style="display:inline-block;margin-bottom:64px;font-size:15px;color:#86868b;">
-    View archive →
-  </a>
-
+  <a href="{{ '/archive/' | relative_url }}" class="view-archive-link">View archive &rarr;</a>
 </div>
