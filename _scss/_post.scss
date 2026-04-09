@@ -10,11 +10,20 @@
   .post-title {
     font-family: var(--font-serif);
     font-size: var(--text-xl);
-    font-weight: normal;
+    font-weight: bold;
     line-height: 1.25;
     color: var(--color-text);
-    margin-bottom: var(--space-4);
+    margin-bottom: var(--space-2);
     max-width: 28ch;
+  }
+
+  .post-subtitle {
+    font-family: var(--font-serif);
+    font-size: var(--text-base);
+    font-weight: normal;
+    color: var(--color-text-muted);
+    margin-bottom: var(--space-4);
+    line-height: 1.4;
   }
 
   .post-meta {
@@ -35,7 +44,7 @@
 
   h2 {
     font-size: var(--text-lg);
-    font-weight: normal;
+    font-weight: bold;
     margin-top: 2em;
     margin-bottom: 0.6em;
   }

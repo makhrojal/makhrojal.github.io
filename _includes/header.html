@@ -2,28 +2,9 @@
   <div class="header-inner">
     <a href="{{ '/' | relative_url }}" class="site-name" aria-label="{{ site.title }} — Home">{{ site.title }}</a>
     <nav class="header-nav" aria-label="Main navigation">
-      <a href="{{ '/' | relative_url }}">Writing</a>
+      <a href="{{ '/archive/' | relative_url }}">Archive</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-      <button class="theme-toggle" data-theme-toggle aria-label="Toggle dark mode">&#9788;</button>
+      <a href="{{ '/feed.xml' | relative_url }}">Subscribe</a>
     </nav>
   </div>
 </header>
-<script>
-(function(){
-  var h=document.documentElement;
-  var d=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');
-  h.setAttribute('data-theme',d);
-  document.addEventListener('DOMContentLoaded',function(){
-    var btn=document.querySelector('[data-theme-toggle]');
-    if(!btn)return;
-    btn.textContent=d==='dark'?'&#9790;':'&#9788;';
-    btn.addEventListener('click',function(){
-      d=d==='dark'?'light':'dark';
-      h.setAttribute('data-theme',d);
-      try{localStorage.setItem('theme',d);}catch(e){}
-      btn.textContent=d==='dark'?'&#9790;':'&#9788;';
-    });
-  });
-})();
-</script>

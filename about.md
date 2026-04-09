@@ -5,13 +5,12 @@ description: "About Kak Ojal — educator, writer, and independent thinker."
 permalink: /about/
 ---
 
+<div class="page-container">
 <article class="post-article">
-  <header class="post-header fade-in">
-    <div class="container container--narrow">
-      <h1 class="post-title">About</h1>
-    </div>
+  <header class="post-header">
+    <h1 class="post-title">About</h1>
   </header>
-  <div class="post-body container container--narrow prose">
+  <div class="post-body prose">
 
 Hai, saya **Kak Ojal** — seorang pendidik, penulis, dan pemikir independen.
 
@@ -25,9 +24,6 @@ Situs ini adalah tempat saya berpikir keras — tentang ide, pendidikan, keuanga
 - Ilmu yang paling berharga adalah yang terasa seperti bermain, bukan bekerja
 - Menulis bukan untuk audiens — menulis untuk memahami
 
-## Menghubungi saya
-
-Saya membaca semua pesan yang masuk. Email adalah cara terbaik untuk memulai percakapan.
-
   </div>
 </article>
+</div>

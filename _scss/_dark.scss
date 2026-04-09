@@ -1,8 +1,4 @@
 // ============================================
-// DARK MODE — handled via CSS variables in _variables.scss
-// No extra overrides needed beyond variable switching
+// DARK MODE — nav.al does not have dark mode
+// Keeping this file empty intentionally
 // ============================================
-
-[data-theme="dark"] {
-  img { opacity: 0.92; }
-}

@@ -1,5 +1,5 @@
 // ============================================
-// POST LIST — Naval.al style
+// POST LIST — Naval.al exact style
 // ============================================
 
 .post-list {
@@ -8,16 +8,17 @@
 }
 
 .post-entry {
-  margin-bottom: var(--space-12);
-  padding-bottom: var(--space-12);
+  margin-bottom: var(--space-16);
+  padding-bottom: 0;
 }
 
+// Title: bold, black, larger
 .post-entry__title {
   font-family: var(--font-serif);
   font-size: var(--text-lg);
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.3;
-  margin-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 
   a {
     color: var(--color-text);
@@ -26,27 +27,56 @@
   }
 }
 
+// Subtitle/tagline: normal weight, slightly muted, no italic
+.post-entry__subtitle {
+  font-family: var(--font-serif);
+  font-size: var(--text-base);
+  font-weight: normal;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-3);
+  line-height: 1.4;
+}
+
+// Excerpt: grey text, Georgia
 .post-entry__excerpt {
   font-family: var(--font-serif);
   font-size: var(--text-base);
   line-height: 1.65;
-  color: var(--color-text);
+  color: var(--color-text-muted);
   margin-bottom: var(--space-2);
   max-width: 68ch;
 
   a {
     color: var(--color-text);
-    text-decoration: underline;
-    &:hover { opacity: 0.7; }
+    text-decoration: none;
+    &:hover { text-decoration: underline; }
   }
 }
 
+// Meta: reading time · date — small, grey
 .post-entry__meta {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   font-family: var(--font-serif);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
 }
 
 .meta-dot {
   color: var(--color-text-muted);
+  margin: 0 2px;
+}
+
+// "More ›" inline link
+.more-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: var(--text-base);
+  margin-left: 4px;
+  &:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
 }

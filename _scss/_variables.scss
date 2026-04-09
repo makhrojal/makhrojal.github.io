@@ -1,17 +1,18 @@
 // ============================================
-// VARIABLES — Naval.al-inspired minimal palette
+// VARIABLES — Naval.al exact palette
 // ============================================
 
 :root, [data-theme="light"] {
-  --color-bg:        #ffffff;
-  --color-text:      #111111;
-  --color-text-muted:#999999;
-  --color-border:    #e8e8e8;
-  --color-link:      #111111;
+  --color-bg:           #ffffff;
+  --color-text:         #111111;
+  --color-text-muted:   #999999;
+  --color-border:       #e8e8e8;
+  --color-link:         #111111;
+  --color-accent:       #c0392b;   /* Naval-style crimson/dark red */
 
   --font-serif: Georgia, "Times New Roman", Times, serif;
 
-  --width-content: 640px;
+  --width-content: 740px;
   --padding-x:     24px;
 
   --text-xs:   13px;
@@ -25,28 +26,11 @@
   --space-2:  8px;
   --space-3:  12px;
   --space-4:  16px;
+  --space-5:  20px;
   --space-6:  24px;
   --space-8:  32px;
   --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
   --space-20: 80px;
-}
-
-[data-theme="dark"] {
-  --color-bg:        #0f0f0f;
-  --color-text:      #d4d4d4;
-  --color-text-muted:#777777;
-  --color-border:    #2a2a2a;
-  --color-link:      #d4d4d4;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme]) {
-    --color-bg:        #0f0f0f;
-    --color-text:      #d4d4d4;
-    --color-text-muted:#777777;
-    --color-border:    #2a2a2a;
-    --color-link:      #d4d4d4;
-  }
 }

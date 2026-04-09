@@ -18,12 +18,11 @@ html {
 
 body {
   min-height: 100dvh;
-  background-color: var(--color-bg);
-  color: var(--color-text);
-  font-family: var(--font-serif);
-  font-size: var(--text-base);
+  background-color: #ffffff;
+  color: #111111;
+  font-family: Georgia, "Times New Roman", Times, serif;
+  font-size: 16px;
   line-height: 1.6;
-  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 img, picture, video {
@@ -42,22 +41,18 @@ input, button, textarea, select {
 p, li { max-width: 72ch; }
 
 a {
-  color: var(--color-link);
+  color: #111111;
   text-decoration: none;
   &:hover { text-decoration: underline; }
 }
 
 ::selection {
   background: rgba(0,0,0,0.1);
-  color: var(--color-text);
-}
-
-[data-theme="dark"] ::selection {
-  background: rgba(255,255,255,0.15);
+  color: #111111;
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-text);
+  outline: 2px solid #111111;
   outline-offset: 3px;
 }
 
@@ -65,8 +60,8 @@ a {
   position: absolute;
   top: -40px;
   left: 0;
-  background: var(--color-text);
-  color: var(--color-bg);
+  background: #111111;
+  color: #ffffff;
   padding: 8px 16px;
   z-index: 100;
   &:focus { top: 0; }

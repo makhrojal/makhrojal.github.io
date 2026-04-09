@@ -1,11 +1,11 @@
 <footer class="site-footer" role="contentinfo">
   <div class="footer-inner">
-    <p class="footer-name">{{ site.title }}</p>
+    <span class="footer-name">{{ site.title }}</span>
     <nav class="footer-nav" aria-label="Footer navigation">
       <a href="{{ '/' | relative_url }}">Writing</a>
       <a href="{{ '/about/' | relative_url }}">About</a>
-      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+      <a href="{{ '/feed.xml' | relative_url }}">Subscribe</a>
     </nav>
-    <p class="footer-copy">&copy; {{ 'now' | date: "%Y" }} Kak Ojal</p>
+    <p class="footer-copy">&copy; {{ 'now' | date: "%Y" }} {{ site.author.name }}</p>
   </div>
 </footer>

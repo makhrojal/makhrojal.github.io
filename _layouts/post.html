@@ -4,6 +4,9 @@ layout: default
 <article class="post-article page-container">
   <header class="post-header">
     <h1 class="post-title">{{ page.title }}</h1>
+    {% if page.subtitle %}
+    <p class="post-subtitle">{{ page.subtitle }}</p>
+    {% endif %}
     <p class="post-meta">
       {% if page.reading_time %}<span>{{ page.reading_time }} min read</span><span class="meta-dot"> · </span>{% endif %}
       <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
