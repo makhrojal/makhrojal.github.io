@@ -1,5 +1,6 @@
 // ============================================================
 // COMPONENTS — Apple Newsroom exact card system
+// FLAT CSS — no SCSS nesting (Jekyll/LibSass compat)
 // ============================================================
 
 // ── TAGS / LABELS ─────────────────────────────────────────
@@ -18,7 +19,7 @@
 .tag--quick   { color: #bf4800; }
 .tag--story   { color: #1c7c3c; }
 
-// ── HERO CARD — HORIZONTAL SPLIT (image left 62%, text right 38%) ──
+// ── HERO CARD — HORIZONTAL SPLIT (image 62% / text 38%) ──
 .hero-card {
   display: grid;
   grid-template-columns: 62% 38%;
@@ -31,17 +32,17 @@
               transform 240ms cubic-bezier(0.25,0.1,0.25,1);
   text-decoration: none;
   color: inherit;
-  &:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
+}
+.hero-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .hero-card__img-wrap {
   width: 100%;
   height: 100%;
   min-height: 320px;
   overflow: hidden;
-  background: var(--color-surface-2);
+  background: var(--color-surface-2, #f5f5f7);
 }
 .hero-card__img {
   width: 100%;
@@ -77,7 +78,7 @@
   margin-top: 8px;
 }
 
-// ── SIDE CARD (tall, image fills top half) ─────────────────
+// ── SIDE CARD ──────────────────────────────────────────────
 .side-card {
   display: flex;
   flex-direction: column;
@@ -89,10 +90,10 @@
   color: inherit;
   transition: box-shadow 240ms cubic-bezier(0.25,0.1,0.25,1),
               transform 240ms cubic-bezier(0.25,0.1,0.25,1);
-  &:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
+}
+.side-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .side-card__img-wrap {
   flex: 1;
@@ -133,10 +134,10 @@
   color: inherit;
   transition: box-shadow 240ms cubic-bezier(0.25,0.1,0.25,1),
               transform 240ms cubic-bezier(0.25,0.1,0.25,1);
-  &:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
+}
+.news-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .news-card__img-wrap {
   width: 100%;
@@ -144,7 +145,8 @@
   overflow: hidden;
 }
 .news-card__img {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 240ms cubic-bezier(0.25,0.1,0.25,1);
@@ -187,10 +189,10 @@
   color: inherit;
   transition: box-shadow 240ms cubic-bezier(0.25,0.1,0.25,1),
               transform 240ms cubic-bezier(0.25,0.1,0.25,1);
-  &:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
+}
+.more-item:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .more-item__img-wrap {
   width: 100%;
@@ -198,7 +200,8 @@
   overflow: hidden;
 }
 .more-item__img {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 240ms cubic-bezier(0.25,0.1,0.25,1);
@@ -228,15 +231,18 @@
 
 // ── SECTION WRAPPERS ──────────────────────────────────────
 .news-section {
-  padding-block: clamp(48px, 6vw, 80px);
-  background: var(--color-bg);
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  background: #f5f5f7;
 }
 .news-section__inner,
 .stories-section__inner,
 .more-section__inner {
   max-width: 1200px;
-  margin-inline: auto;
-  padding-inline: clamp(20px, 5vw, 48px);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(20px, 5vw, 48px);
+  padding-right: clamp(20px, 5vw, 48px);
 }
 .news-section__title,
 .stories-title,
@@ -262,7 +268,8 @@
   gap: 20px;
 }
 .stories-section {
-  padding-block: clamp(48px, 6vw, 80px);
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(48px, 6vw, 80px);
   background: #ffffff;
   border-top: 1px solid #d2d2d7;
 }
@@ -286,17 +293,17 @@
 .story-card {
   display: flex;
   flex-direction: column;
-  background: var(--color-bg);
+  background: #f5f5f7;
   border-radius: 12px;
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   transition: transform 240ms cubic-bezier(0.25,0.1,0.25,1),
               box-shadow 240ms cubic-bezier(0.25,0.1,0.25,1);
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: var(--shadow-card);
-  }
+}
+.story-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-card);
 }
 .story-card__img-wrap {
   width: 100%;
@@ -304,7 +311,8 @@
   overflow: hidden;
 }
 .story-card__img {
-  width: 100%; height: 100%;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
   display: block;
   transition: transform 240ms cubic-bezier(0.25,0.1,0.25,1);
@@ -337,8 +345,9 @@
   margin-top: auto;
 }
 .more-section {
-  padding-block: clamp(48px, 6vw, 80px);
-  background: var(--color-bg);
+  padding-top: clamp(48px, 6vw, 80px);
+  padding-bottom: clamp(48px, 6vw, 80px);
+  background: #f5f5f7;
   border-top: 1px solid #d2d2d7;
 }
 .more-header {
@@ -361,23 +370,25 @@
   padding-top: 24px;
   border-top: 1px solid #d2d2d7;
 }
-.view-all-link, .view-all-btn {
+.view-all-link,
+.view-all-btn {
   font-family: var(--font-text);
   font-size: 16px;
   color: #0071e3;
   text-decoration: none;
   transition: opacity 160ms cubic-bezier(0.25,0.1,0.25,1);
   white-space: nowrap;
-  &:hover { opacity: 0.7; }
 }
+.view-all-link:hover,
+.view-all-btn:hover { opacity: 0.7; }
 .archive-link {
   font-size: 16px;
   color: var(--color-text-secondary);
   text-decoration: none;
-  &:hover { color: var(--color-text); }
 }
+.archive-link:hover { color: var(--color-text); }
 
-// ── ARTICLE CARD (legacy — keep for post pages) ────────────
+// ── LEGACY ARTICLE CARDS (kept for post pages) ────────────
 .article-card {
   display: flex;
   flex-direction: column;
@@ -388,15 +399,14 @@
   text-decoration: none;
   color: inherit;
   transition: box-shadow var(--transition), transform var(--transition);
-
-  &:hover {
-    box-shadow: var(--shadow-card-hover);
-    transform: translateY(-2px);
-  }
+}
+.article-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
 }
 .article-card__img-wrap {
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: 16/9;
   overflow: hidden;
   background: var(--color-surface-2);
   flex-shrink: 0;
@@ -408,9 +418,7 @@
   display: block;
   transition: transform var(--transition);
 }
-.article-card:hover .article-card__img {
-  transform: scale(1.04);
-}
+.article-card:hover .article-card__img { transform: scale(1.04); }
 .article-card__body {
   padding: var(--space-6);
   display: flex;
@@ -472,9 +480,8 @@
   text-decoration: none;
   color: inherit;
   transition: background var(--transition);
-
-  &:hover { background: var(--color-surface-2); }
 }
+.article-list-item:hover { background: var(--color-surface-2); }
 .article-list-item__category {
   font-size: var(--text-caption);
   font-weight: 600;
@@ -502,8 +509,10 @@
 // ── SECTION HEADERS ───────────────────────────────────────
 .section__inner {
   max-width: var(--width-wide);
-  margin-inline: auto;
-  padding-inline: var(--padding-x);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--padding-x);
+  padding-right: var(--padding-x);
 }
 .section__header {
   display: flex;
@@ -526,24 +535,16 @@
   white-space: nowrap;
   flex-shrink: 0;
   transition: opacity var(--transition);
-  &:hover { opacity: 0.7; }
 }
-
-// ── ARTICLE GRID ──────────────────────────────────────────
+.section__link:hover { opacity: 0.7; }
 .article-grid {
   display: grid;
   gap: var(--space-6);
 }
-.article-grid--3col {
-  grid-template-columns: repeat(3, 1fr);
-}
+.article-grid--3col { grid-template-columns: repeat(3, 1fr); }
 @media (max-width: 900px) {
-  .article-grid--3col {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .article-grid--3col { grid-template-columns: repeat(2, 1fr); }
 }
 @media (max-width: 600px) {
-  .article-grid--3col {
-    grid-template-columns: 1fr;
-  }
+  .article-grid--3col { grid-template-columns: 1fr; }
 }
