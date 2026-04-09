@@ -2,9 +2,10 @@
 layout: post
 title: "Kekayaan Bukan Soal Keberuntungan"
 subtitle: "Wealth creation adalah skill, bukan lotre."
-date: 2025-01-15
+date: 2026-03-28
 category: Wealth
 reading_time: 6
+image: /assets/images/hero-wealth.jpg
 excerpt: >
   Kekayaan dibangun lewat leverage, ilmu spesifik, dan akuntabilitas —
   bukan nasib baik. Ini bukan teori; ini cara kerja sistem.

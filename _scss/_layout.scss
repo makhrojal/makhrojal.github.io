@@ -1,8 +1,13 @@
 // ============================================================
 // LAYOUT — Apple.com precision
-// Nav: 44px, frosted glass. Content: 980px max. 
-// Section padding: generous white space = confidence
+// Nav: two-bar (44px global black + 52px local frosted glass)
+// Content: 1200px max. Section padding: generous white space.
 // ============================================================
+
+// ── SMOOTH SCROLL ────────────────────────────────────────────
+html {
+  scroll-behavior: smooth;
+}
 
 // ── PAGE CONTAINER ───────────────────────────────────────────
 .page-container {
@@ -26,36 +31,137 @@
   background: var(--color-bg);
 }
 
-// ── NAV / HEADER ─────────────────────────────────────────────
-// Exact Apple nav: frosted glass, 44px height, sticky
-// Text: 12px #1d1d1f nav items, centered flex, max-width 980px
-.site-header {
-  position:   sticky;
+// ── GLOBAL NAV — Apple.com black top bar (44px, #1d1d1f) ─────
+.global-nav {
+  position:   fixed;
   top:        0;
-  z-index:    100;
-  height:     var(--nav-height);
+  left:       0;
+  right:      0;
+  z-index:    200;
+  height:     var(--nav-global-h, 44px);
+  background: var(--nav-global-bg, #1d1d1f);
+  display:    flex;
+  align-items: center;
+}
 
-  background: var(--nav-bg);
-  backdrop-filter:         var(--nav-blur);
-  -webkit-backdrop-filter: var(--nav-blur);
+.global-nav__inner {
+  max-width:      1200px;
+  margin-inline:  auto;
+  padding-inline: clamp(20px, 5vw, 48px);
+  height:         100%;
+  display:        flex;
+  align-items:    center;
+  justify-content: space-between;
+  gap:            var(--space-6);
+  width:          100%;
+}
 
-  border-bottom: 1px solid var(--nav-border);
+// Apple logo in global nav — white
+.global-nav__logo a {
+  color: rgba(245, 245, 247, 0.85);
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity 160ms cubic-bezier(0.25,0.1,0.25,1);
+  &:hover { opacity: 0.7; }
+}
 
-  // Smooth shadow on scroll (JS will add .is-scrolled)
-  box-shadow: none;
-  transition:
-    box-shadow var(--transition),
-    background var(--transition);
+// Nav links — 12px, weight 400, rgba(245,245,247,0.85)
+.global-nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(16px, 2vw, 28px);
 
-  &.is-scrolled {
-    box-shadow: 0 1px 0 var(--nav-border);
+  a {
+    font-family:    var(--font-text);
+    font-size:      12px;
+    font-weight:    400;
+    color:          rgba(245, 245, 247, 0.85);
+    text-decoration: none;
+    white-space:    nowrap;
+    transition:     opacity 160ms cubic-bezier(0.25,0.1,0.25,1);
+
+    &:hover { opacity: 0.7; }
+    &.nav-active {
+      font-weight: 600;
+      opacity: 1;
+      color: #f5f5f7;
+    }
   }
 }
 
-.header-inner {
-  max-width:      var(--width-content);
+// Search + icons — right side of global nav
+.global-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-shrink: 0;
+}
+
+.global-nav__icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  color: rgba(245, 245, 247, 0.85);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 50%;
+  transition: opacity 160ms cubic-bezier(0.25,0.1,0.25,1);
+
+  &:hover { opacity: 0.7; }
+  svg { pointer-events: none; }
+}
+
+// ── LOCAL NAV — frosted glass, 52px, sticky top: 44px ────────
+.local-nav {
+  position:   sticky;
+  top:        var(--nav-global-h, 44px);
+  left:       0;
+  right:      0;
+  z-index:    150;
+  height:     var(--nav-local-h, 52px);
+
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter:         blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  box-shadow: none;
+  transition: box-shadow 240ms cubic-bezier(0.25,0.1,0.25,1);
+
+  &.is-scrolled {
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+  }
+}
+
+// Dark mode local nav
+[data-theme="dark"] .local-nav {
+  background: var(--local-nav-bg, rgba(28, 28, 30, 0.85));
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+[data-theme="dark"] .local-nav__brand,
+[data-theme="dark"] .local-nav__tabs a.active { color: #f5f5f7; }
+[data-theme="dark"] .local-nav__tabs a { color: #86868b; }
+[data-theme="dark"] .local-nav__tabs a.active { border-bottom-color: #f5f5f7; }
+[data-theme="dark"] .local-nav__search {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.12);
+  color: #86868b;
+}
+@media (prefers-color-scheme: dark) {
+  .local-nav:not([data-theme="light"]) {
+    background: rgba(28, 28, 30, 0.85);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+  }
+}
+
+.local-nav__inner {
+  max-width:      1200px;
   margin-inline:  auto;
-  padding-inline: var(--padding-x);
+  padding-inline: clamp(20px, 5vw, 48px);
   height:         100%;
   display:        flex;
   align-items:    center;
@@ -63,82 +169,110 @@
   gap:            var(--space-6);
 }
 
-// Apple logo / site name — left of nav
-.site-name {
-  font-family:    var(--font-text);
-  font-size:      var(--text-callout);  /* 16px — matches Apple nav wordmark */
+// "Newsroom" brand — 21px, weight 600
+.local-nav__brand {
+  font-family:    var(--font-display);
+  font-size:      21px;
   font-weight:    600;
-  letter-spacing: -0.01em;
-  color:          var(--color-text);
+  letter-spacing: -0.02em;
+  color:          #1d1d1f;
   text-decoration: none;
   flex-shrink:    0;
-  transition:     opacity var(--transition);
+  transition:     opacity 160ms cubic-bezier(0.25,0.1,0.25,1);
 
   &:hover { opacity: 0.7; }
 }
 
-// Nav links — exactly Apple.com: 12px, #1d1d1f, no underline
-.header-nav {
-  display:     flex;
+// Local nav tabs — 13px, weight 400, grey #6e6e73
+.local-nav__tabs {
+  display: flex;
   align-items: center;
-  gap:         clamp(var(--space-4), 3vw, var(--space-8));
+  gap: clamp(16px, 2vw, 24px);
+  flex: 1;
+  margin-left: 24px;
 
   a {
     font-family:    var(--font-text);
-    font-size:      var(--text-footnote);  /* 12-13px — Apple exact */
+    font-size:      13px;
     font-weight:    400;
-    letter-spacing: 0;
-    color:          var(--color-text);
+    color:          #6e6e73;
     text-decoration: none;
     white-space:    nowrap;
-    opacity:        0.8;
-    transition:     opacity var(--transition);
+    padding-bottom: 2px;
+    border-bottom:  2px solid transparent;
+    transition:     color 160ms cubic-bezier(0.25,0.1,0.25,1),
+                    border-color 160ms cubic-bezier(0.25,0.1,0.25,1);
 
-    &:hover { opacity: 1; }
+    &:hover {
+      color: #1d1d1f;
+    }
 
-    &.nav-active {
-      font-weight: 600;
-      opacity:     1;
+    &.active {
+      font-weight:  600;
+      color:        #1d1d1f;
+      border-bottom-color: #1d1d1f;
     }
   }
 }
 
-// Theme toggle button
+// "Search Newsroom" pill
+.local-nav__search {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f5f5f7;
+  border: 1px solid #d2d2d7;
+  border-radius: 980px;
+  padding: 6px 14px;
+  font-family: var(--font-text);
+  font-size: 13px;
+  color: #6e6e73;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 160ms cubic-bezier(0.25,0.1,0.25,1),
+              border-color 160ms cubic-bezier(0.25,0.1,0.25,1);
+
+  &:hover {
+    background: #e8e8ed;
+    border-color: #c7c7cc;
+  }
+
+  svg { pointer-events: none; flex-shrink: 0; }
+}
+
+/* body padding-top is handled in _base.scss */
+
+// ── THEME TOGGLE ─────────────────────────────────────────────
 .theme-toggle {
   display:        flex;
   align-items:    center;
   justify-content: center;
   width:          28px;
   height:         28px;
-  border-radius:  var(--radius-full);
+  border-radius:  var(--radius-full, 9999px);
   background:     transparent;
-  color:          var(--color-text);
-  opacity:        0.7;
+  color:          rgba(245, 245, 247, 0.85);
+  opacity:        0.85;
   flex-shrink:    0;
-  transition:
-    opacity var(--transition),
-    background var(--transition);
+  transition:     opacity 160ms cubic-bezier(0.25,0.1,0.25,1);
 
-  &:hover {
-    opacity:    1;
-    background: var(--color-surface-offset);
-  }
-
+  &:hover { opacity: 1; }
   svg { pointer-events: none; }
 }
 
 // ── FOOTER ───────────────────────────────────────────────────
 // Apple footer: #f5f5f7 bg, 12px text, divider lines
 .site-footer {
-  background:   var(--color-bg);
-  border-top:   1px solid var(--color-divider);
+  background:   #f5f5f7;
+  border-top:   1px solid #d2d2d7;
   padding-block: var(--space-10) var(--space-12);
 }
 
 .footer-inner {
-  max-width:      var(--width-content);
+  max-width:      1200px;
   margin-inline:  auto;
-  padding-inline: var(--padding-x);
+  padding-inline: clamp(20px, 5vw, 48px);
 }
 
 .footer-top {
@@ -148,15 +282,15 @@
   gap:             var(--space-8);
   flex-wrap:       wrap;
   padding-bottom:  var(--space-8);
-  border-bottom:   1px solid var(--color-divider);
+  border-bottom:   1px solid #d2d2d7;
   margin-bottom:   var(--space-6);
 }
 
 .footer-brand {
   font-family: var(--font-text);
-  font-size:   var(--text-callout);
+  font-size:   16px;
   font-weight: 600;
-  color:       var(--color-text);
+  color:       #1d1d1f;
   letter-spacing: -0.01em;
 }
 
@@ -167,12 +301,12 @@
 
   a {
     font-family:    var(--font-text);
-    font-size:      var(--text-footnote);
-    color:          var(--color-text-secondary);
+    font-size:      12px;
+    color:          #6e6e73;
     text-decoration: none;
-    transition:     color var(--transition);
+    transition:     color 160ms cubic-bezier(0.25,0.1,0.25,1);
 
-    &:hover { color: var(--color-text); }
+    &:hover { color: #1d1d1f; }
   }
 }
 
@@ -186,8 +320,8 @@
 
 .footer-copy {
   font-family: var(--font-text);
-  font-size:   var(--text-caption);
-  color:       var(--color-text-secondary);
+  font-size:   12px;
+  color:       #6e6e73;
 }
 
 .footer-legal {
@@ -196,14 +330,38 @@
   flex-wrap:  wrap;
 
   a {
-    font-size:   var(--text-caption);
-    color:       var(--color-text-secondary);
+    font-size:   12px;
+    color:       #6e6e73;
     text-decoration: none;
-    &:hover { color: var(--color-text); }
+    &:hover { color: #1d1d1f; }
   }
 }
 
-// ── SECTION HEADER (writing archive label) ───────────────────
+// ── SKIP LINK ─────────────────────────────────────────────────
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  &:focus {
+    position: fixed;
+    top: var(--nav-global-h, 44px);
+    left: 20px;
+    z-index: 9999;
+    width: auto;
+    height: auto;
+    padding: 8px 16px;
+    background: #ffffff;
+    color: #1d1d1f;
+    font-size: 14px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  }
+}
+
+// ── SECTION HEADER (legacy) ───────────────────────────────────
 .section-label {
   font-family:    var(--font-text);
   font-size:      var(--text-callout);
@@ -244,27 +402,36 @@
   gap:         var(--space-3);
 }
 
-// ── MAIN ─────────────────────────────────────────────────────
 main { display: block; }
 
 // ── RESPONSIVE ───────────────────────────────────────────────
+@media (max-width: 1100px) {
+  .hero-row { grid-template-columns: 1fr 300px; }
+  .stories-grid, .more-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 880px) {
+  .hero-row { grid-template-columns: 1fr; }
+  .hero-card { grid-template-columns: 1fr; }
+  .hero-card__img-wrap { min-height: 240px; aspect-ratio: 16/9; height: auto; }
+  .side-card__img-wrap { aspect-ratio: 16/9; flex: none; }
+  .global-nav__links { display: none; }
+  .local-nav__tabs { display: none; }
+}
+
 @media (max-width: 700px) {
   .footer-top {
     flex-direction: column;
     gap:            var(--space-6);
   }
+}
 
-  .header-nav {
-    gap: var(--space-4);
-
-    a {
-      font-size: var(--text-caption);
-    }
-  }
+@media (max-width: 640px) {
+  .card-row-2 { grid-template-columns: 1fr; }
+  .stories-grid, .more-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 480px) {
-  .site-name {
-    font-size: var(--text-footnote);
-  }
+  .local-nav__brand { font-size: 17px; }
+  .local-nav__search { display: none; }
 }

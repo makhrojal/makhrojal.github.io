@@ -2,9 +2,10 @@
 layout: post
 title: "Ilmu Spesifik Adalah Yang Tidak Bisa Diajarkan"
 subtitle: "Skill paling berharga adalah yang kamu bangun tanpa sadar."
-date: 2025-03-01
-category: Philosophy
+date: 2026-04-07
+category: Mindset
 reading_time: 4
+image: /assets/images/hero-knowledge.jpg
 excerpt: >
   Skill paling berharga yang kamu punya adalah yang terasa mudah untukmu
   dan mustahil bagi orang lain.
