@@ -1,13 +1,17 @@
-<header class="site-header" role="banner" id="site-header">
-  <div class="header-inner">
+<!-- ── GLOBAL NAV — Apple.com black top bar ── -->
+<div class="global-nav" role="banner">
+  <div class="global-nav__inner">
+    <!-- Apple logo -->
+    <div class="global-nav__logo">
+      <a href="{{ '/' | relative_url }}" aria-label="{{ site.title }} — Home">
+        <svg width="18" height="22" viewBox="0 0 18 22" fill="currentColor" aria-hidden="true" focusable="false">
+          <path d="M14.83 11.17c.02-1.64.88-3.16 2.3-4.04a5.52 5.52 0 0 0-4.35-2.34c-1.83-.19-3.6 1.09-4.53 1.09-.95 0-2.38-1.07-3.92-1.04a5.78 5.78 0 0 0-4.86 2.97C-2.42 11.7-.88 17.9 1.5 21.29c1.19 1.71 2.59 3.61 4.42 3.54 1.79-.07 2.46-1.14 4.62-1.14 2.14 0 2.77 1.14 4.64 1.1 1.92-.03 3.13-1.72 4.28-3.44a12.5 12.5 0 0 0 1.95-3.97 5.4 5.4 0 0 1-3.58-5.21zm-3.35-9.6A5.32 5.32 0 0 0 12.69 0a5.42 5.42 0 0 0-3.54 1.82 5.08 5.08 0 0 0-1.27 3.69 4.5 4.5 0 0 0 3.6-3.94z"/>
+        </svg>
+      </a>
+    </div>
 
-    <!-- Site name / wordmark -->
-    <a href="{{ '/' | relative_url }}"
-       class="site-name"
-       aria-label="{{ site.title }} — Home">{{ site.title }}</a>
-
-    <!-- Primary navigation -->
-    <nav class="header-nav" aria-label="Main navigation">
+    <!-- Primary nav links -->
+    <nav class="global-nav__links" aria-label="Global navigation">
       <a href="{{ '/archive/' | relative_url }}"
          {% if page.url contains '/archive' %}class="nav-active"{% endif %}>Archive</a>
       <a href="{{ '/about/' | relative_url }}"
@@ -15,64 +19,69 @@
       <a href="{{ '/feed.xml' | relative_url }}">Subscribe</a>
     </nav>
 
-    <!-- Dark mode toggle — Apple-style icon button -->
-    <button class="theme-toggle"
-            aria-label="Switch to dark mode"
-            data-theme-toggle
-            type="button">
-      <!-- Moon icon (shown in light mode) -->
+    <!-- Dark mode toggle -->
+    <button class="theme-toggle" aria-label="Switch to dark mode" data-theme-toggle type="button">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-           stroke="currentColor" stroke-width="2"
-           stroke-linecap="round" stroke-linejoin="round"
+           stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
            aria-hidden="true" focusable="false">
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
       </svg>
     </button>
-
   </div>
-</header>
+</div>
 
+<!-- ── LOCAL NAV — Apple sub-site bar ── -->
+<nav class="local-nav" id="local-nav" aria-label="Site navigation">
+  <div class="local-nav__inner">
+    <a href="{{ '/' | relative_url }}" class="local-nav__brand">{{ site.title }}</a>
+    <div class="local-nav__links">
+      <a href="{{ '/' | relative_url }}"
+         {% if page.url == '/' or page.layout == 'home' %}class="active"{% endif %}>Writing</a>
+      <a href="{{ '/archive/' | relative_url }}"
+         {% if page.url contains '/archive' %}class="active"{% endif %}>Archive</a>
+      <a href="{{ '/about/' | relative_url }}"
+         {% if page.url == '/about/' %}class="active"{% endif %}>About</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Theme + Nav scripts ── -->
 <script>
-  (function () {
-    const btn   = document.querySelector('[data-theme-toggle]');
-    const root  = document.documentElement;
-    const hdr   = document.getElementById('site-header');
+(function () {
+  const btn  = document.querySelector('[data-theme-toggle]');
+  const root = document.documentElement;
+  const nav  = document.getElementById('local-nav');
 
-    // ── Theme init ────────────────────────────────────────
-    const stored   = root.getAttribute('data-theme');
-    const sysDark  = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let   theme    = stored || (sysDark ? 'dark' : 'light');
+  // Theme init
+  const sys  = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  let theme  = root.getAttribute('data-theme') || (sys ? 'dark' : 'light');
+  root.setAttribute('data-theme', theme);
+
+  function syncIcon(t) {
+    if (!btn) return;
+    btn.setAttribute('aria-label', 'Switch to ' + (t === 'dark' ? 'light' : 'dark') + ' mode');
+    btn.innerHTML = t === 'dark'
+      ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>'
+      : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+  }
+  syncIcon(theme);
+
+  btn && btn.addEventListener('click', function () {
+    theme = theme === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', theme);
-
-    function syncIcon(t) {
-      if (!btn) return;
-      btn.setAttribute('aria-label', 'Switch to ' + (t === 'dark' ? 'light' : 'dark') + ' mode');
-      btn.innerHTML = t === 'dark'
-        ? '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>'
-        : '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-    }
     syncIcon(theme);
+  });
 
-    // ── Toggle ────────────────────────────────────────────
-    btn && btn.addEventListener('click', function () {
-      theme = theme === 'dark' ? 'light' : 'dark';
-      root.setAttribute('data-theme', theme);
-      syncIcon(theme);
-    });
-
-    // ── Nav scroll shadow ─────────────────────────────────
-    // Matches Apple.com: shadow appears only after scrolling
-    var ticking = false;
-    window.addEventListener('scroll', function () {
-      if (!ticking) {
-        requestAnimationFrame(function () {
-          if (hdr) {
-            hdr.classList.toggle('is-scrolled', window.scrollY > 0);
-          }
-          ticking = false;
-        });
-        ticking = true;
-      }
-    }, { passive: true });
-  })();
+  // Local nav scroll shadow
+  var ticking = false;
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      requestAnimationFrame(function () {
+        nav && nav.classList.toggle('is-scrolled', window.scrollY > 0);
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
+})();
 </script>

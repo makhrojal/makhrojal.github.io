@@ -1,29 +1,54 @@
 ---
 layout: default
 ---
-<article class="post-article page-container">
-  <header class="post-header">
-    <h1 class="post-title">{{ page.title }}</h1>
-    {% if page.subtitle %}
-    <p class="post-subtitle">{{ page.subtitle }}</p>
+
+<!-- ── POST HERO — dark full-bleed like Apple Security Blog article pages ── -->
+<div class="post-page">
+
+  <header class="post-hero" aria-label="Article header">
+    {% if page.image %}
+    <img class="post-hero__img" src="{{ page.image | relative_url }}" alt="{{ page.title }}" />
+    {% elsif page.category == 'Governance' %}
+    <img class="post-hero__img" src="/assets/images/card-governance.jpg" alt="{{ page.title }}" />
+    {% elsif page.category == 'Wealth' %}
+    <img class="post-hero__img" src="/assets/images/card-wealth.jpg" alt="{{ page.title }}" />
+    {% else %}
+    <img class="post-hero__img" src="/assets/images/card-knowledge.jpg" alt="{{ page.title }}" />
     {% endif %}
-    <p class="post-meta">
-      {% if page.reading_time %}<span>{{ page.reading_time }} min read</span><span class="meta-dot"> · </span>{% endif %}
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-    </p>
+
+    <div class="post-hero__inner">
+      {% if page.category %}
+      <span class="post-hero__category">{{ page.category }}</span>
+      {% endif %}
+      <h1 class="post-hero__title">{{ page.title }}</h1>
+      {% if page.subtitle %}
+      <p class="post-hero__subtitle">{{ page.subtitle }}</p>
+      {% endif %}
+      <div class="post-hero__meta">
+        {% if page.reading_time %}<span>{{ page.reading_time }} min read</span> · {% endif %}
+        <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
+      </div>
+    </div>
   </header>
-  <div class="post-body prose">
-    {{ content }}
+
+  <!-- ── PROSE BODY ── -->
+  <div class="prose-wrap">
+    <article class="prose" id="article-body">
+      {{ content }}
+    </article>
   </div>
-  <footer class="post-footer">
-    <div class="post-nav">
+
+  <!-- ── POST FOOTER ── -->
+  <div class="post-footer">
+    <nav class="post-footer__nav" aria-label="Article navigation">
       {% if page.previous.url %}
-      <a href="{{ page.previous.url | relative_url }}" class="post-nav__prev">&#8592; {{ page.previous.title }}</a>
+      <a href="{{ page.previous.url | relative_url }}">← {{ page.previous.title }}</a>
       {% endif %}
       {% if page.next.url %}
-      <a href="{{ page.next.url | relative_url }}" class="post-nav__next">{{ page.next.title }} &#8594;</a>
+      <a href="{{ page.next.url | relative_url }}">{{ page.next.title }} →</a>
       {% endif %}
-    </div>
-    <a href="{{ '/' | relative_url }}" class="back-home">&#8592; All writing</a>
-  </footer>
-</article>
+    </nav>
+    <a href="{{ '/' | relative_url }}" class="post-footer__back">← All writing</a>
+  </div>
+
+</div>

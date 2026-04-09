@@ -1,38 +1,147 @@
 ---
 layout: default
 ---
-<div class="page-container">
 
-  <div class="section-header">
-    <div class="section-header-row">
-      <span class="section-label">Writing</span>
-      <ul class="section-links">
-        <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
-        <li><a href="{{ '/about/' | relative_url }}">Newsletter</a></li>
-      </ul>
+<!-- ── HERO — matches security.apple.com/blog dark hero ── -->
+<section class="hero" aria-label="Hero">
+  <div class="hero__bg" aria-hidden="true"></div>
+  <div class="hero__inner">
+    <span class="hero__eyebrow">{{ site.author.bio }}</span>
+    <h1 class="hero__title">{{ site.tagline }}</h1>
+    <p class="hero__subtitle">{{ site.description }}</p>
+  </div>
+</section>
+
+<!-- ── FEATURED POSTS SECTION ── -->
+<section class="section" aria-label="Latest writing">
+  <div class="section__inner">
+
+    <div class="section__header">
+      <h2 class="section__title">Latest Writing</h2>
+      <a href="{{ '/archive/' | relative_url }}" class="section__link">View all →</a>
+    </div>
+
+    {% assign all_posts = site.posts %}
+    {% assign all_pages = site.pages | where_exp: "pg", "pg.is_post == true" %}
+
+    <!-- Article grid -->
+    <div class="article-grid article-grid--3col">
+
+      {% for post in site.posts limit:3 %}
+        {% if forloop.first %}
+        <!-- ── FEATURED CARD (first post, large format) ── -->
+        <a href="{{ post.url | relative_url }}" class="article-card article-card--featured article-card--featured-split" aria-label="{{ post.title }}">
+          <div class="article-card__img-wrap">
+            {% if post.image %}
+            <img class="article-card__img" src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy" />
+            {% elsif post.category == 'Governance' or post.category == 'governance' %}
+            <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="{{ post.title }}" loading="lazy" />
+            {% elsif post.category == 'Wealth' %}
+            <img class="article-card__img" src="/assets/images/card-wealth.jpg" alt="{{ post.title }}" loading="lazy" />
+            {% else %}
+            <img class="article-card__img" src="/assets/images/card-knowledge.jpg" alt="{{ post.title }}" loading="lazy" />
+            {% endif %}
+          </div>
+          <div class="article-card__body">
+            {% if post.category %}
+            <span class="article-card__category">{{ post.category }}</span>
+            {% endif %}
+            <h3 class="article-card__title">{{ post.title }}</h3>
+            {% if post.subtitle %}
+            <p class="article-card__excerpt">{{ post.subtitle }}</p>
+            {% elsif post.excerpt %}
+            <p class="article-card__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+            {% endif %}
+            <div class="article-card__meta">
+              {% if post.reading_time %}<span>{{ post.reading_time }} min read</span><span class="article-card__meta-dot"> · </span>{% endif %}
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            </div>
+            <span class="article-card__read-more">Read more →</span>
+          </div>
+        </a>
+
+        {% else %}
+        <!-- ── REGULAR CARD ── -->
+        <a href="{{ post.url | relative_url }}" class="article-card" aria-label="{{ post.title }}">
+          <div class="article-card__img-wrap">
+            {% if post.image %}
+            <img class="article-card__img" src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy" />
+            {% elsif post.category == 'Governance' %}
+            <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="{{ post.title }}" loading="lazy" />
+            {% elsif post.category == 'Wealth' %}
+            <img class="article-card__img" src="/assets/images/card-wealth.jpg" alt="{{ post.title }}" loading="lazy" />
+            {% else %}
+            <img class="article-card__img" src="/assets/images/card-knowledge.jpg" alt="{{ post.title }}" loading="lazy" />
+            {% endif %}
+          </div>
+          <div class="article-card__body">
+            {% if post.category %}
+            <span class="article-card__category">{{ post.category }}</span>
+            {% endif %}
+            <h3 class="article-card__title">{{ post.title }}</h3>
+            {% if post.subtitle %}
+            <p class="article-card__excerpt">{{ post.subtitle }}</p>
+            {% elsif post.excerpt %}
+            <p class="article-card__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+            {% endif %}
+            <div class="article-card__meta">
+              {% if post.reading_time %}<span>{{ post.reading_time }} min read</span><span class="article-card__meta-dot"> · </span>{% endif %}
+              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+            </div>
+            <span class="article-card__read-more">Read more →</span>
+          </div>
+        </a>
+        {% endif %}
+      {% endfor %}
+
+      <!-- ── DASAR HUKUM SAKIP — manual card (standalone HTML page) ── -->
+      <a href="/dasar-hukum-sakip/" class="article-card" aria-label="Daftar Lengkap Dasar Hukum SAKIP di Indonesia">
+        <div class="article-card__img-wrap">
+          <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="Dasar Hukum SAKIP" loading="lazy" />
+        </div>
+        <div class="article-card__body">
+          <span class="article-card__category">Governance</span>
+          <h3 class="article-card__title">Daftar Lengkap Dasar Hukum SAKIP di Indonesia</h3>
+          <p class="article-card__excerpt">Hierarki regulasi SAKIP dari UUD 1945 hingga Permen PANRB 88/2021 — panduan komprehensif untuk ASN dan pemerhati tata kelola pemerintahan.</p>
+          <div class="article-card__meta">
+            <span>12 min read</span><span class="article-card__meta-dot"> · </span>
+            <time datetime="2024-12-01">Dec 1, 2024</time>
+          </div>
+          <span class="article-card__read-more">Read more →</span>
+        </div>
+      </a>
+
+    </div><!-- /.article-grid -->
+
+  </div>
+</section>
+
+<!-- ── ALL POSTS LIST SECTION — Apple Security Blog style ── -->
+{% if site.posts.size > 3 %}
+<section class="section section--gray" aria-label="More writing">
+  <div class="section__inner">
+    <div class="section__header">
+      <h2 class="section__title">More Writing</h2>
+    </div>
+    <div class="article-list" role="list">
+      {% for post in site.posts offset:3 %}
+      <a href="{{ post.url | relative_url }}" class="article-list-item" role="listitem" aria-label="{{ post.title }}">
+        {% if post.category %}
+        <span class="article-list-item__category">{{ post.category }}</span>
+        {% endif %}
+        <h3 class="article-list-item__title">{{ post.title }}</h3>
+        {% if post.subtitle %}
+        <p class="article-list-item__excerpt">{{ post.subtitle }}</p>
+        {% elsif post.excerpt %}
+        <p class="article-list-item__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
+        {% endif %}
+        <div class="article-list-item__meta">
+          {% if post.reading_time %}<span>{{ post.reading_time }} min read</span> · {% endif %}
+          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        </div>
+      </a>
+      {% endfor %}
     </div>
   </div>
-
-  <div class="post-list">
-    {% for post in site.posts %}
-    <div class="post-entry">
-      <h2 class="post-entry__title">
-        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      </h2>
-      {% if post.subtitle %}
-      <p class="post-entry__subtitle">{{ post.subtitle }}</p>
-      {% endif %}
-      {% if post.excerpt %}
-      <p class="post-entry__excerpt">
-        {{ post.excerpt | strip_html | truncate: 220 }}<a href="{{ post.url | relative_url }}" class="more-link"> More ›</a>
-      </p>
-      {% endif %}
-      <p class="post-entry__meta">
-        {% if post.reading_time %}<span>{{ post.reading_time }} min read</span><span class="meta-dot"> · </span>{% endif %}
-        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-      </p>
-    </div>
-    {% endfor %}
-  </div>
-
-</div>
+</section>
+{% endif %}
