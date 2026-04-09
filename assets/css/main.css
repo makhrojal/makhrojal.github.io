@@ -398,6 +398,10 @@ main { display: block; }
   transition:     opacity var(--transition);
 }
 .header-nav a:hover { opacity: 1; }
+
+/* Force 44px min-width on all nav items — Apple HIG touch target */
+.header-nav a { box-sizing: border-box; width: max(44px, fit-content); }
+
 .header-nav a.nav-active {
   font-weight: 600;
   opacity:     1;
