@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "About"
-description: "About Kak Ojal — educator, writer, and civil servant."
+description: "About Kak Ojal — writer, civil servant, and independent thinker."
 permalink: /about/
 ---
 
@@ -9,11 +9,11 @@ permalink: /about/
   <article class="prose">
     <h1>About</h1>
 
-    <p>Hai, saya <strong>Kak Ojal</strong> — seorang pendidik, penulis, dan pemikir independen. PNS Kementerian Perhubungan, pengajar di Adzkia Kedinasan, dan pengelola BXC sebagai side business.</p>
+    <p>Hai, saya <strong>Kak Ojal</strong> — penulis, PNS Kementerian Perhubungan, dan pengelola BXC sebagai side business. Saya menulis tentang hal-hal yang benar-benar saya pikirkan: kekayaan, tata kelola, mindset, dan kehidupan yang dijalani secara sadar.</p>
 
     <p>Saya percaya bahwa berpikir jernih adalah keterampilan paling langka di zaman ini. Menulis adalah cara terbaik untuk melatihnya.</p>
 
-    <p>Situs ini adalah tempat saya berpikir keras — tentang tata kelola pemerintahan, pendidikan, keuangan pribadi, dan hidup yang dijalani secara sadar.</p>
+    <p>Situs ini adalah tempat saya berpikir keras — tentang tata kelola pemerintahan, keuangan pribadi, personal branding, dan generasi sandwich yang menopang dua arah sekaligus.</p>
 
     <h2>Yang saya yakini</h2>
 
@@ -29,7 +29,8 @@ permalink: /about/
     <ul>
       <li><strong>Governance</strong> — SAKIP, tata kelola, akuntabilitas kinerja</li>
       <li><strong>Wealth</strong> — leverage, ilmu spesifik, kebebasan finansial</li>
-      <li><strong>Philosophy</strong> — cara berpikir, cara hidup, cara belajar</li>
+      <li><strong>Mindset</strong> — cara berpikir, konsistensi, sandwich generation</li>
+      <li><strong>BXC</strong> — side business, AI tools, eksekusi di tengah keterbatasan</li>
     </ul>
 
     <p>Reach me at: <a href="mailto:muhammadmakhrojal@gmail.com">muhammadmakhrojal@gmail.com</a></p>

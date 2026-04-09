@@ -19,13 +19,14 @@ html {
   text-size-adjust:         none;
 
   scroll-behavior:  smooth;
-  scroll-padding-top: calc(var(--nav-height) + var(--space-6));
+  scroll-padding-top: calc(var(--nav-global-h, 44px) + var(--nav-local-h, 52px) + var(--space-4));
   hanging-punctuation: first last;
   font-size: 16px;
 }
 
 body {
   min-height: 100dvh;
+  padding-top: var(--nav-global-h, 44px); /* offset for fixed global nav */
   background-color: var(--color-bg);
   color:            var(--color-text);
   font-family:      var(--font-text);

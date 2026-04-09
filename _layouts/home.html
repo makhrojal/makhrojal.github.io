@@ -1,164 +1,106 @@
 ---
 layout: default
 ---
+<!-- LATEST NEWS -->
+<section class="news-section" id="latest">
+  <div class="news-section__inner">
+    <h1 class="news-section__title">Latest News</h1>
 
-<!-- ── HERO — matches security.apple.com/blog dark hero ── -->
-<section class="hero" aria-label="Hero">
-  <div class="hero__bg" aria-hidden="true"></div>
-  <div class="hero__inner">
-    <span class="hero__eyebrow">{{ site.author.bio }}</span>
-    <h1 class="hero__title">{{ site.tagline }}</h1>
-    <p class="hero__subtitle">{{ site.description }}</p>
-  </div>
-</section>
-
-<!-- ── FEATURED POSTS SECTION ── -->
-<section class="section" aria-label="Latest writing">
-  <div class="section__inner">
-
-    <div class="section__header">
-      <h2 class="section__title">Latest Writing</h2>
-      <a href="{{ '/archive/' | relative_url }}" class="section__link">View all →</a>
-    </div>
-
-    {% assign all_posts = site.posts %}
-    {% assign all_pages = site.pages | where_exp: "pg", "pg.is_post == true" %}
-
-    <!-- Article grid -->
-    <div class="article-grid article-grid--3col">
-
-      {% for post in site.posts limit:3 %}
-        {% if forloop.first %}
-        <!-- ── FEATURED CARD (first post, large format) ── -->
-        <a href="{{ post.url | relative_url }}" class="article-card article-card--featured article-card--featured-split" aria-label="{{ post.title }}">
-          <div class="article-card__img-wrap">
-            {% if post.image %}
-            <img class="article-card__img" src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy" />
-            {% elsif post.category == 'Governance' or post.category == 'governance' %}
-            <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="{{ post.title }}" loading="lazy" />
-            {% elsif post.category == 'Wealth' %}
-            <img class="article-card__img" src="/assets/images/card-wealth.jpg" alt="{{ post.title }}" loading="lazy" />
-            {% else %}
-            <img class="article-card__img" src="/assets/images/card-knowledge.jpg" alt="{{ post.title }}" loading="lazy" />
-            {% endif %}
-          </div>
-          <div class="article-card__body">
-            {% if post.category %}
-            <span class="article-card__category">{{ post.category }}</span>
-            {% endif %}
-            <h3 class="article-card__title">{{ post.title }}</h3>
-            {% if post.subtitle %}
-            <p class="article-card__excerpt">{{ post.subtitle }}</p>
-            {% elsif post.excerpt %}
-            <p class="article-card__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-            {% endif %}
-            <div class="article-card__meta">
-              {% if post.reading_time %}<span>{{ post.reading_time }} min read</span><span class="article-card__meta-dot"> · </span>{% endif %}
-              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            </div>
-            <span class="article-card__read-more">Read more →</span>
-          </div>
-        </a>
-
-        {% else %}
-        <!-- ── REGULAR CARD ── -->
-        <a href="{{ post.url | relative_url }}" class="article-card" aria-label="{{ post.title }}">
-          <div class="article-card__img-wrap">
-            {% if post.image %}
-            <img class="article-card__img" src="{{ post.image | relative_url }}" alt="{{ post.title }}" loading="lazy" />
-            {% elsif post.category == 'Governance' %}
-            <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="{{ post.title }}" loading="lazy" />
-            {% elsif post.category == 'Wealth' %}
-            <img class="article-card__img" src="/assets/images/card-wealth.jpg" alt="{{ post.title }}" loading="lazy" />
-            {% else %}
-            <img class="article-card__img" src="/assets/images/card-knowledge.jpg" alt="{{ post.title }}" loading="lazy" />
-            {% endif %}
-          </div>
-          <div class="article-card__body">
-            {% if post.category %}
-            <span class="article-card__category">{{ post.category }}</span>
-            {% endif %}
-            <h3 class="article-card__title">{{ post.title }}</h3>
-            {% if post.subtitle %}
-            <p class="article-card__excerpt">{{ post.subtitle }}</p>
-            {% elsif post.excerpt %}
-            <p class="article-card__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-            {% endif %}
-            <div class="article-card__meta">
-              {% if post.reading_time %}<span>{{ post.reading_time }} min read</span><span class="article-card__meta-dot"> · </span>{% endif %}
-              <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-            </div>
-            <span class="article-card__read-more">Read more →</span>
-          </div>
-        </a>
-        {% endif %}
-      {% endfor %}
-
-      <!-- ── DASAR HUKUM SAKIP — manual card (standalone HTML page) ── -->
-      <a href="/dasar-hukum-sakip/" class="article-card" aria-label="Daftar Lengkap Dasar Hukum SAKIP di Indonesia">
-        <div class="article-card__img-wrap">
-          <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="Dasar Hukum SAKIP" loading="lazy" />
+    <!-- HERO ROW -->
+    <div class="hero-row">
+      <!-- Hero: Ilmu Spesifik (horizontal split) -->
+      {% assign hero = site.posts | where: "slug", "ilmu-spesifik" | first %}
+      {% unless hero %}{% assign hero = site.posts.first %}{% endunless %}
+      <a href="{{ hero.url | relative_url }}" class="hero-card" aria-label="{{ hero.title }}">
+        <div class="hero-card__img-wrap">
+          {% if hero.image %}<img src="{{ hero.image | relative_url }}" alt="{{ hero.title }}" class="hero-card__img" loading="eager">
+          {% else %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ hero.title }}" class="hero-card__img" loading="eager">{% endif %}
         </div>
-        <div class="article-card__body">
-          <span class="article-card__category">Governance</span>
-          <h3 class="article-card__title">Daftar Lengkap Dasar Hukum SAKIP di Indonesia</h3>
-          <p class="article-card__excerpt">Hierarki regulasi SAKIP dari UUD 1945 hingga Permen PANRB 88/2021 — panduan komprehensif untuk ASN dan pemerhati tata kelola pemerintahan.</p>
-          <div class="article-card__meta">
-            <span>12 min read</span><span class="article-card__meta-dot"> · </span>
-            <time datetime="2024-12-01">Dec 1, 2024</time>
+        <div class="hero-card__body">
+          <span class="tag tag--update">{{ hero.category | upcase | default: "UPDATE" }}</span>
+          <h2 class="hero-card__title">{{ hero.title }}</h2>
+          <div class="hero-card__meta">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <time datetime="{{ hero.date | date_to_xmlschema }}">{{ hero.date | date: "%b %-d, %Y" }}</time>
           </div>
-          <span class="article-card__read-more">Read more →</span>
         </div>
       </a>
 
-      <!-- ── DASAR HUKUM SPIP — manual card (standalone HTML page) ── -->
-      <a href="/dasar-hukum-spip/" class="article-card" aria-label="Daftar Lengkap Dasar Hukum SPIP di Indonesia">
-        <div class="article-card__img-wrap">
-          <img class="article-card__img" src="/assets/images/card-governance.jpg" alt="Dasar Hukum SPIP" loading="lazy" />
+      <!-- Side card: Kekayaan -->
+      {% assign side = site.posts | where: "slug", "kekayaan-bukan-keberuntungan" | first %}
+      {% unless side %}{% assign side = site.posts[1] %}{% endunless %}
+      <a href="{{ side.url | relative_url }}" class="side-card" aria-label="{{ side.title }}">
+        <div class="side-card__img-wrap">
+          {% if side.image %}<img src="{{ side.image | relative_url }}" alt="{{ side.title }}" class="side-card__img" loading="eager">
+          {% else %}<img src="/assets/images/hero-wealth.jpg" alt="{{ side.title }}" class="side-card__img" loading="eager">{% endif %}
         </div>
-        <div class="article-card__body">
-          <span class="article-card__category">Governance</span>
-          <h3 class="article-card__title">Daftar Lengkap Dasar Hukum SPIP di Indonesia</h3>
-          <p class="article-card__excerpt">Hierarki regulasi SPIP dari UUD 1945 hingga PM Kemenhub 25/2018 — panduan komprehensif untuk ASN dan pemerhati tata kelola pemerintahan.</p>
-          <div class="article-card__meta">
-            <span>12 min read</span><span class="article-card__meta-dot"> · </span>
-            <time datetime="2026-04-09">Apr 9, 2026</time>
+        <div class="side-card__body">
+          <span class="tag tag--update">{{ side.category | upcase | default: "UPDATE" }}</span>
+          <h2 class="side-card__title">{{ side.title }}</h2>
+          <div class="hero-card__meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <time datetime="{{ side.date | date_to_xmlschema }}">{{ side.date | date: "%b %-d, %Y" }}</time>
           </div>
-          <span class="article-card__read-more">Read more →</span>
         </div>
       </a>
-
-    </div><!-- /.article-grid -->
-
-  </div>
-</section>
-
-<!-- ── ALL POSTS LIST SECTION — Apple Security Blog style ── -->
-{% if site.posts.size > 3 %}
-<section class="section section--gray" aria-label="More writing">
-  <div class="section__inner">
-    <div class="section__header">
-      <h2 class="section__title">More Writing</h2>
     </div>
-    <div class="article-list" role="list">
-      {% for post in site.posts offset:3 %}
-      <a href="{{ post.url | relative_url }}" class="article-list-item" role="listitem" aria-label="{{ post.title }}">
-        {% if post.category %}
-        <span class="article-list-item__category">{{ post.category }}</span>
-        {% endif %}
-        <h3 class="article-list-item__title">{{ post.title }}</h3>
-        {% if post.subtitle %}
-        <p class="article-list-item__excerpt">{{ post.subtitle }}</p>
-        {% elsif post.excerpt %}
-        <p class="article-list-item__excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-        {% endif %}
-        <div class="article-list-item__meta">
-          {% if post.reading_time %}<span>{{ post.reading_time }} min read</span> · {% endif %}
-          <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+
+    <!-- 2-COL ROW -->
+    <div class="card-row-2">
+      {% assign posts_row2 = site.posts | offset: 2 | limit: 2 %}
+      {% for post in posts_row2 %}
+      <a href="{{ post.url | relative_url }}" class="news-card">
+        <div class="news-card__img-wrap">
+          {% if post.image %}<img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="news-card__img" loading="lazy">
+          {% elsif post.category == "Governance" %}<img src="/assets/images/card-governance.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">
+          {% elsif post.category == "Wealth" %}<img src="/assets/images/card-wealth.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">
+          {% elsif post.category == "Mindset" %}<img src="/assets/images/hero-knowledge.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">
+          {% else %}<img src="/assets/images/more-bxc.jpg" alt="{{ post.title }}" class="news-card__img" loading="lazy">{% endif %}
+        </div>
+        <div class="news-card__body">
+          <span class="tag tag--{% if post.category == 'Governance' %}press{% elsif post.category == 'Mindset' %}story{% else %}update{% endif %}">{{ post.category | upcase | default: "UPDATE" }}</span>
+          <h3 class="news-card__title">{{ post.title }}</h3>
+          <div class="news-card__meta">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          </div>
         </div>
       </a>
       {% endfor %}
     </div>
   </div>
 </section>
-{% endif %}
+
+<!-- MORE FROM NEWSROOM — 8 items in 4-col grid -->
+<section class="more-section" id="more">
+  <div class="more-section__inner">
+    <div class="more-header">
+      <h2 class="more-title">More from Newsroom</h2>
+      <a href="{{ '/archive/' | relative_url }}" class="view-all-link">View archive ›</a>
+    </div>
+    <div class="more-grid">
+      {% assign more_posts = site.posts | offset: 4 | limit: 8 %}
+      {% assign imgs = "more-bxc.jpg,more-sakip.jpg,more-leverage.jpg,more-branding.jpg,more-sandwich.jpg,more-ai.jpg,more-pns-bisnis.jpg,more-konsistensi.jpg" | split: "," %}
+      {% for post in more_posts %}
+      {% assign img_idx = forloop.index0 | modulo: 8 %}
+      <a href="{{ post.url | relative_url }}" class="more-item">
+        <div class="more-item__img-wrap">
+          {% if post.image %}<img src="{{ post.image | relative_url }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">
+          {% else %}<img src="/assets/images/{{ imgs[img_idx] }}" alt="{{ post.title }}" class="more-item__img" loading="lazy">{% endif %}
+        </div>
+        <div class="more-item__body">
+          <span class="tag tag--{% if post.category == 'Governance' %}press{% elsif post.category == 'Mindset' %}story{% elsif post.category == 'BXC' %}quick{% else %}update{% endif %}">
+            {% if post.category == 'BXC' %}QUICK READ{% else %}{{ post.category | upcase | default: "UPDATE" }}{% endif %}
+          </span>
+          <h3 class="more-item__title">{{ post.title }}</h3>
+          <time class="more-item__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+    <div class="more-footer-links">
+      <a href="{{ '/archive/' | relative_url }}" class="view-all-btn">View All ›</a>
+      <a href="{{ '/archive/' | relative_url }}" class="archive-link">View Archive ›</a>
+    </div>
+  </div>
+</section>
