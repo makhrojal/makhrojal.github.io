@@ -235,9 +235,12 @@ a:hover { opacity: 0.75; }
   left:       0;
   background: var(--color-text);
   color:      var(--color-bg);
-  padding:    var(--space-2) var(--space-4);
+  padding:    var(--space-3) var(--space-4); /* space-3=12px: 12+12+19(text)=43→44 */
+  min-height: 44px;
   z-index:    200;
   font-size:  var(--text-body);
+  display:    inline-flex;
+  align-items: center;
   transition: top var(--duration-fast) var(--ease-apple);
 }
 .skip-link:focus { top: 0; }
@@ -389,6 +392,7 @@ main { display: block; }
   display:        inline-flex;
   align-items:    center;
   padding-inline: var(--space-2);
+  justify-content: center;
   transition:     opacity var(--transition);
 }
 .header-nav a:hover { opacity: 1; }
@@ -460,8 +464,11 @@ main { display: block; }
   color:          var(--color-text-secondary);
   text-decoration: none;
   min-height:     44px;
+  min-width:      44px;
   display:        inline-flex;
   align-items:    center;
+  justify-content: center;
+  padding-inline: var(--space-2);
   transition:     color var(--transition);
 }
 .footer-nav a:hover { color: var(--color-text); opacity: 1; }
@@ -487,8 +494,11 @@ main { display: block; }
   color:           var(--color-text-secondary);
   text-decoration: none;
   min-height:      44px;
+  min-width:       44px;
   display:         inline-flex;
   align-items:     center;
+  justify-content: center;
+  padding-inline:  var(--space-2);
   transition:      color var(--transition);
 }
 .footer-legal a:hover { color: var(--color-text); opacity: 1; }
@@ -517,8 +527,10 @@ main { display: block; }
   font-weight:    400;
   text-decoration: none;
   min-height:     44px;
+  min-width:      44px;
   display:        inline-flex;
   align-items:    center;
+  justify-content: center;
   padding-inline: var(--space-1);
   transition:     opacity var(--transition);
 }
@@ -604,8 +616,12 @@ main { display: block; }
   text-decoration: none;
   font-size:       var(--text-callout);
   margin-left:     var(--space-1);
-  /* inline so it doesn't break flow but still tappable */
-  padding-block:   var(--space-3);
+  /* Apple HIG: 44×44 minimum — use padding to expand hit area */
+  display:         inline-flex;
+  align-items:     center;
+  min-height:      44px;
+  min-width:       44px;
+  padding-inline:  var(--space-2);
   transition:      opacity var(--transition);
 }
 .more-link:hover { opacity: 0.7; }
