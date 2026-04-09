@@ -1,18 +1,11 @@
 <footer class="site-footer" role="contentinfo">
-  <div class="container footer-inner">
-    <div class="footer-left">
-      <p class="footer-name">{{ site.title }}</p>
-      <p class="footer-bio">{{ site.author.bio }}</p>
-    </div>
-    <div class="footer-right">
-      <nav class="footer-nav" aria-label="Footer navigation">
-        <a href="{{ '/' | relative_url }}">Writing</a>
-        <a href="{{ '/about/' | relative_url }}">About</a>
-        <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
-      </nav>
-    </div>
-  </div>
-  <div class="container footer-bottom">
-    <p>&copy; {{ 'now' | date: "%Y" }} Kak Ojal. All rights reserved.</p>
+  <div class="footer-inner">
+    <p class="footer-name">{{ site.title }}</p>
+    <nav class="footer-nav" aria-label="Footer navigation">
+      <a href="{{ '/' | relative_url }}">Writing</a>
+      <a href="{{ '/about/' | relative_url }}">About</a>
+      <a href="{{ '/feed.xml' | relative_url }}">RSS</a>
+    </nav>
+    <p class="footer-copy">&copy; {{ 'now' | date: "%Y" }} Kak Ojal</p>
   </div>
 </footer>

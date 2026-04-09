@@ -1,4 +1,25 @@
 ---
 layout: default
 ---
-{{ content }}
+<div class="page-container">
+  <p class="section-label">All Writing</p>
+  <div class="post-list">
+    {% for post in site.posts %}
+    <div class="post-entry">
+      <h2 class="post-entry__title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      {% if post.excerpt %}
+      <p class="post-entry__excerpt">
+        {{ post.excerpt | strip_html | truncate: 180 }}
+        <a href="{{ post.url | relative_url }}">More</a>
+      </p>
+      {% endif %}
+      <p class="post-entry__meta">
+        {% if post.reading_time %}<span>{{ post.reading_time }} min read</span><span class="meta-dot"> · </span>{% endif %}
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      </p>
+    </div>
+    {% endfor %}
+  </div>
+</div>
