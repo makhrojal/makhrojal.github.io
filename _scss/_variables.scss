@@ -118,4 +118,10 @@
   --nav-bg: rgba(255, 255, 255, 0.85);
   --nav-blur: blur(20px) saturate(180%);
   --nav-border: rgba(0, 0, 0, 0.08);
+
+  // ── FONT ALIASES (compat with new components) ────────────
+  --font-text:    var(--font-sf);
+  --font-display: var(--font-sf-display);
+  --color-text-secondary: var(--color-text-secondary, #6e6e73);
+
 }
