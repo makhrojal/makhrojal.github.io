@@ -148,8 +148,8 @@ main { display: block; }
   margin-right: auto;
   padding-left: 24px;
   padding-right: 24px;
-  padding-top: 32px;
-  padding-bottom: 32px;
+  padding-top: 18px;
+  padding-bottom: 18px;
 }
 
 .header-inner {
@@ -257,14 +257,14 @@ main { display: block; }
 .section-links li a:hover { text-decoration: underline; }
 
 .section-header {
-  margin-bottom: 48px;
+  margin-bottom: 72px;
 }
 
 .section-header-row {
   display: flex;
   align-items: baseline;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 8px;
 }
 
 /* ============================================
@@ -281,10 +281,10 @@ main { display: block; }
 
 .post-entry__title {
   font-family: Georgia, "Times New Roman", Times, serif;
-  font-size: 22px;
+  font-size: 20px;
   font-weight: bold;
   line-height: 1.3;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
 
 .post-entry__title a {
@@ -313,17 +313,17 @@ main { display: block; }
 
 .post-entry__meta {
   font-size: 14px;
-  color: #999999;
+  color: #aaaaaa;
   font-family: Georgia, "Times New Roman", Times, serif;
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
 }
 
 .meta-dot {
-  color: #999999;
-  margin: 0 2px;
+  color: #aaaaaa;
+  margin: 0 1px;
 }
 
 .more-link {
@@ -443,7 +443,7 @@ main { display: block; }
 /* POST FOOTER NAV */
 .post-footer {
   margin-top: 64px;
-  padding-top: 32px;
+  padding-top: 20px;
   border-top: 1px solid #e8e8e8;
 }
 
