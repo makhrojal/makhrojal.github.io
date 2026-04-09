@@ -386,14 +386,14 @@ main { display: block; }
   text-decoration: none;
   opacity:        0.8;
   white-space:    nowrap;
-  /* Apple HIG 44px tap target — explicit padding + min dimensions */
+  /* Apple HIG 44px tap target — fixed height + enough padding */
   height:          44px;
   min-width:       44px;
   display:         inline-flex;
   align-items:     center;
   justify-content: center;
-  /* Enough horizontal padding to ensure short words reach 44px */
-  padding-inline:  max(var(--space-2), calc((44px - 100%) / 2));
+  /* 12px per side: even "About" (29px text) hits 53px total ≥ 44 */
+  padding-inline:  12px;
   flex-shrink:     0;
   transition:     opacity var(--transition);
 }
